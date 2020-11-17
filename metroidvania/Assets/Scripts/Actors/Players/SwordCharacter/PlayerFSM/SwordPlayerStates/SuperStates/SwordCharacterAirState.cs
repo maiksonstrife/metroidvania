@@ -38,7 +38,7 @@ public class SwordCharacterAirState : SwordCharaterState
         }
         else if (_jumpInput && SwordCharacter.JumpState.CanJump())
         {
-            SwordCharacter.Anim.SetBool("isDoubleJump", true);
+            SwordCharacter.Anim.SetTrigger("isDoubleJumpTrigger");
             SwordCharaterStateMachine.ChangeState(SwordCharacter.JumpState);
         }
         else

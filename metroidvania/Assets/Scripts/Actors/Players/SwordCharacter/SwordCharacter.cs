@@ -93,7 +93,6 @@ public class SwordCharacter : MonoBehaviour
     #endregion
 
     #region Other Functions
-    public void IsDoubleJumpFinished() => Anim.SetBool("isDoubleJump", false);
     private void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
     private void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
     private void Flip()
@@ -102,7 +101,6 @@ public class SwordCharacter : MonoBehaviour
         transform.Rotate(0.0f, 180.0f, 0.0f);
     }
     #endregion
-
 
 #if UNITY_EDITOR
     void OnGUI()

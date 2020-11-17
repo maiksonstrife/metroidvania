@@ -8,6 +8,12 @@ public class SwordCharacterLandState : SwordCharacterGroundedState
     {
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+        SwordCharacter.SetVelocityX(0f);
+    }
+
     public override void LogicUpdate()
     {
         base.LogicUpdate();
