@@ -93,6 +93,7 @@ public class SwordCharacter : MonoBehaviour
     #endregion
 
     #region Other Functions
+    public void IsDoubleJumpFinished() => Anim.SetBool("isDoubleJump", false);
     private void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
     private void AnimationFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
     private void Flip()
