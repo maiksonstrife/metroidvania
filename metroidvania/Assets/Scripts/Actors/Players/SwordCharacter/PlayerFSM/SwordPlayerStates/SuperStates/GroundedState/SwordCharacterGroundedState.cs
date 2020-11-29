@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class SwordCharacterGroundedState : SwordCharaterState
 {
     protected int XInput;
-    private bool JumpInput;
-    protected bool isGrounded;
+    private bool _jumpInput;
+    private bool _grabInput;
+    private bool _isGrounded;
+    private bool _isGrabbable;
     public SwordCharacterGroundedState(SwordCharacter swordCharacter, SwordCharaterStateMachine statemachine, SwordCharacterData swordCharacterData, string _animBoolName)
     : base(swordCharacter, statemachine, swordCharacterData, _animBoolName)
     {
@@ -15,7 +18,8 @@ public class SwordCharacterGroundedState : SwordCharaterState
     public override void DoChecks()
     {
         base.DoChecks();
-        isGrounded = SwordCharacter.CheckIfTouchingGround();
+        _isGrounded = SwordCharacter.CheckIfTouchingGround();
+        _isGrabbable = SwordCharacter.CheckIfIsGrabbable();
     }
 
     public override void Enter()
@@ -27,17 +31,26 @@ public class SwordCharacterGroundedState : SwordCharaterState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        XInput = SwordCharacter.InputHandler.NormalizeInputX;
-        JumpInput = SwordCharacter.InputHandler.JumpInput;
-        if (JumpInput && SwordCharacter.JumpState.CanJump())
+        XInput = SwordCharacter.InputHandler.InputX;
+        _jumpInput = SwordCharacter.InputHandler.JumpInput;
+        _grabInput = SwordCharacter.InputHandler.GrabInput;
+
+        if (_jumpInput && SwordCharacter.JumpState.CanJump())
         {
             SwordCharacter.InputHandler.JumpButtonUsed();
             SwordCharaterStateMachine.ChangeState(SwordCharacter.JumpState);
         }
-        else if (!isGrounded)
+        else if (_isGrabbable && _grabInput)
         {
+            Debug.Log("reached here");
+            SwordCharaterStateMachine.ChangeState(SwordCharacter.WallGrabState);
+        }
+        else if (!_isGrounded)
+        {
+
             SwordCharacter.AirState.StartCoyoteTime();
             SwordCharaterStateMachine.ChangeState(SwordCharacter.AirState);
         }
+
     }
 }

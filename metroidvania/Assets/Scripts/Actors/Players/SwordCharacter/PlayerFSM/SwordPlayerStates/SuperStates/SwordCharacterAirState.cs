@@ -5,11 +5,13 @@ using UnityEngine;
 public class SwordCharacterAirState : SwordCharaterState
 {
     private int _xInput;
+    private bool _grabInput;
     private bool _isGrounded;
+    private bool _isTouchingWall;
+    private bool _isGrabbable;
     private bool _jumpInput;
     private bool _coyoteTime;
     private bool _isJumping;
-    private bool _isDoubleJumping;
     private bool _jumpInputStop;
 
     public SwordCharacterAirState(SwordCharacter swordCharacter, SwordCharaterStateMachine statemachine, SwordCharacterData swordCharacterData, string _animBoolName) : base(swordCharacter, statemachine, swordCharacterData, _animBoolName)
@@ -20,15 +22,18 @@ public class SwordCharacterAirState : SwordCharaterState
     {
         base.DoChecks();
         _isGrounded = SwordCharacter.CheckIfTouchingGround();
+        _isTouchingWall = SwordCharacter.CheckIfTouchingWall();
+        _isGrabbable = SwordCharacter.CheckIfIsGrabbable();
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
         CheckCoyoteTime();
-        _xInput = SwordCharacter.InputHandler.NormalizeInputX;
+        _xInput = SwordCharacter.InputHandler.InputX;
         _jumpInput = SwordCharacter.InputHandler.JumpInput;
         _jumpInputStop = SwordCharacter.InputHandler.JumpInputStop;
+        _grabInput = SwordCharacter.InputHandler.GrabInput;
 
         CheckJumpMultiplier();
 
@@ -36,10 +41,19 @@ public class SwordCharacterAirState : SwordCharaterState
         {
             SwordCharaterStateMachine.ChangeState(SwordCharacter.LandState);
         }
-        else if (_jumpInput && SwordCharacter.JumpState.CanJump())
+        else if (SwordCharacterData.canDoubleJump && _jumpInput && SwordCharacter.JumpState.CanJump())
         {
             SwordCharacter.Anim.SetTrigger("isDoubleJumpTrigger");
+            SwordCharacter.InputHandler.JumpButtonUsed();
             SwordCharaterStateMachine.ChangeState(SwordCharacter.JumpState);
+        }
+        else if (_isGrabbable && _grabInput)
+        {
+            SwordCharaterStateMachine.ChangeState(SwordCharacter.WallGrabState);
+        }
+        else if (_isTouchingWall && _xInput == SwordCharacter.FacingDirection && SwordCharacter.CurrentVelocity.y <= 0 && SwordCharacterData.canSlide)
+        {
+            SwordCharaterStateMachine.ChangeState(SwordCharacter.WallSlideState);
         }
         else
         {

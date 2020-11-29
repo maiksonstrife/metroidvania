@@ -11,6 +11,9 @@ public class SwordCharacter : MonoBehaviour
     public SwordCharacterJumpState JumpState { get; private set; }
     public SwordCharacterAirState AirState { get; private set; }
     public SwordCharacterLandState LandState { get; private set; }
+    public SwordCharacterWallSlideState WallSlideState { get; private set; }
+    public SwordCharacterWallGrabState WallGrabState { get; private set; }
+    public SwordCharacterWallClimbState WallClimbState { get; private set; }
 
     [SerializeField]
     private SwordCharacterData _characterData;
@@ -25,6 +28,8 @@ public class SwordCharacter : MonoBehaviour
     #region Check Transforms
     [SerializeField]
     private Transform groundCheck;
+    [SerializeField]
+    private Transform _wallCheck;
     #endregion
 
     #region Player Variables
@@ -44,6 +49,9 @@ public class SwordCharacter : MonoBehaviour
         JumpState = new SwordCharacterJumpState(this, StateMachine, _characterData, "inAir");
         AirState = new SwordCharacterAirState(this, StateMachine, _characterData, "inAir");
         LandState = new SwordCharacterLandState(this, StateMachine, _characterData, "land");
+        WallSlideState = new SwordCharacterWallSlideState(this, StateMachine, _characterData, "wallSlide");
+        WallGrabState = new SwordCharacterWallGrabState(this, StateMachine, _characterData, "wallGrab");
+        WallClimbState = new SwordCharacterWallClimbState(this, StateMachine, _characterData, "wallClimb");
     }
 
     private void Start()
@@ -56,6 +64,7 @@ public class SwordCharacter : MonoBehaviour
 
     private void Update()
     {
+        //Debug.DrawRay(_wallCheck.position, Vector2.right * FacingDirection * _characterData.WallCheckDistance, Color.cyan);
         CurrentVelocity = RB.velocity;
         StateMachine.CurrentState.LogicUpdate();
     }
@@ -90,6 +99,15 @@ public class SwordCharacter : MonoBehaviour
         if (XInput != 0 && XInput != FacingDirection) Flip();
     }
 
+    public bool CheckIfTouchingWall()
+    {
+        return Physics2D.Raycast(_wallCheck.position, Vector2.right * FacingDirection, _characterData.WallCheckDistance, _characterData.WhatIsGround);
+    }
+
+    public bool CheckIfIsGrabbable()
+    {
+        return Physics2D.Raycast(_wallCheck.position, Vector2.right * FacingDirection, _characterData.WallCheckDistance, _characterData.WhatIsGrabbable);
+    }
     #endregion
 
     #region Other Functions
@@ -102,11 +120,24 @@ public class SwordCharacter : MonoBehaviour
     }
     #endregion
 
+    #region Gizmos
 #if UNITY_EDITOR
     void OnGUI()
     {
         string state = StateMachine.CurrentState.ToString();
-        GUI.Label(new Rect(0, 0, 1000, 100), state);
+        GUI.Box(new Rect(0, 0, 200, 25), state);
+
+        string checkGrabbable = "Grabbable : " + CheckIfIsGrabbable();
+        GUI.Box(new Rect(205, 0, 125, 25), checkGrabbable);
+
+        string checkGround = "Ground : " + CheckIfTouchingGround();
+        GUI.Box(new Rect(335, 0, 125, 25), checkGround);
+
+        string checkWall = "Wall : " + CheckIfTouchingWall();
+        GUI.Box(new Rect(465, 0, 125, 25), checkWall);
     }
 #endif
+    #endregion
+
+
 }

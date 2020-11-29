@@ -7,10 +7,11 @@ public class SwordCharacterInputHandler : MonoBehaviour
 {
 
     public Vector2 RawMovementInput { get; private set; }
-    public int NormalizeInputX { get; private set; }
-    public int NormalizeInputY { get; private set; }
+    public int InputX { get; private set; }
+    public int InputY { get; private set; }
     public bool JumpInput { get; private set; }
     public bool JumpInputStop { get; private set; }
+    public bool GrabInput { get; private set; }
 
     [SerializeField]
     private float _inputHoldTime = 0.2f;
@@ -23,8 +24,14 @@ public class SwordCharacterInputHandler : MonoBehaviour
 
     public void OnMoveInput(InputAction.CallbackContext context){
         RawMovementInput = context.ReadValue<Vector2>();
-        NormalizeInputX = (int)(RawMovementInput * Vector2.right).normalized.x; 
-        NormalizeInputY = (int)(RawMovementInput * Vector2.up).normalized.y;
+        
+        if (Mathf.Abs(RawMovementInput.x) > 0.5f)
+            InputX = (int)(RawMovementInput * Vector2.right).normalized.x;
+        else InputX = 0;
+
+        if (Mathf.Abs(RawMovementInput.y) > 0.5f)
+            InputY = (int)(RawMovementInput * Vector2.up).normalized.y;
+        else InputY = 0;
     }
 
     public void OnJumpInput(InputAction.CallbackContext context)
@@ -38,6 +45,19 @@ public class SwordCharacterInputHandler : MonoBehaviour
         if (context.canceled)
         {
             JumpInputStop = true;
+        }
+    }
+
+    public void OnGrabInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            GrabInput = true;
+        }
+
+        if (context.canceled)
+        {
+            GrabInput = false;
         }
     }
 
