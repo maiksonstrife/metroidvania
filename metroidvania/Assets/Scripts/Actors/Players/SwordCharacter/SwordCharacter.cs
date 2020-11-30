@@ -17,6 +17,8 @@ public class SwordCharacter : MonoBehaviour
 
     [SerializeField]
     private SwordCharacterData _characterData;
+    private string _previousState;
+    private bool _canLog;
     #endregion
 
     #region Components
@@ -124,8 +126,12 @@ public class SwordCharacter : MonoBehaviour
 #if UNITY_EDITOR
     void OnGUI()
     {
-        string state = StateMachine.CurrentState.ToString();
-        GUI.Box(new Rect(0, 0, 200, 25), state);
+        string currentState = StateMachine.CurrentState.ToString();
+        GUI.Box(new Rect(0, 0, 200, 25), currentState);
+
+        if (GUI.Button(new Rect(0, Screen.height - 25, 200, 25), $"Create States Log        {_canLog}")) _canLog = !_canLog;
+
+        if (_previousState != currentState && _canLog) Debug.Log(currentState);
 
         string checkGrabbable = "Grabbable : " + CheckIfIsGrabbable();
         GUI.Box(new Rect(205, 0, 125, 25), checkGrabbable);
@@ -135,6 +141,7 @@ public class SwordCharacter : MonoBehaviour
 
         string checkWall = "Wall : " + CheckIfTouchingWall();
         GUI.Box(new Rect(465, 0, 125, 25), checkWall);
+        _previousState = currentState;
     }
 #endif
     #endregion

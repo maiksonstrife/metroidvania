@@ -55,7 +55,7 @@ public class SwordCharacterTouchingWallState : SwordCharaterState
         {
             SwordCharaterStateMachine.ChangeState(SwordCharacter.IdleState);
         }
-        else if (!IsTouchingWall && !IsTouchingGrabbable || XInput != SwordCharacter.FacingDirection && !GrabInput)
+        else if (!IsTouchingWall && !IsTouchingGrabbable || XInput != SwordCharacter.FacingDirection && !GrabInput && !IsGrounded)
         {
             SwordCharaterStateMachine.ChangeState(SwordCharacter.AirState);
         }

@@ -13,5 +13,7 @@ public class SwordCharacterWallSlideState : SwordCharacterTouchingWallState
         SwordCharacter.SetVelocityY(-SwordCharacterData.WallSlideVelocity);
 
         if (GrabInput && YInput == 0 && IsTouchingGrabbable) SwordCharaterStateMachine.ChangeState(SwordCharacter.WallGrabState);
+        else if (GrabInput && YInput != 0 && IsTouchingGrabbable) SwordCharaterStateMachine.ChangeState(SwordCharacter.WallClimbState);
+        else if (XInput != SwordCharacter.FacingDirection || !IsTouchingWall) SwordCharaterStateMachine.ChangeState(SwordCharacter.AirState);
     }
 }

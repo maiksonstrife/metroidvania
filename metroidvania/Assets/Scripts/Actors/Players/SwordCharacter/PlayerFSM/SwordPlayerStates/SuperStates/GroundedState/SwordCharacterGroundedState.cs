@@ -6,6 +6,7 @@ using UnityEngine;
 public class SwordCharacterGroundedState : SwordCharaterState
 {
     protected int XInput;
+    protected int YInput;
     private bool _jumpInput;
     private bool _grabInput;
     private bool _isGrounded;
@@ -32,6 +33,7 @@ public class SwordCharacterGroundedState : SwordCharaterState
     {
         base.LogicUpdate();
         XInput = SwordCharacter.InputHandler.InputX;
+        YInput = SwordCharacter.InputHandler.InputY;
         _jumpInput = SwordCharacter.InputHandler.JumpInput;
         _grabInput = SwordCharacter.InputHandler.GrabInput;
 
@@ -40,9 +42,8 @@ public class SwordCharacterGroundedState : SwordCharaterState
             SwordCharacter.InputHandler.JumpButtonUsed();
             SwordCharaterStateMachine.ChangeState(SwordCharacter.JumpState);
         }
-        else if (_isGrabbable && _grabInput)
+        else if (_isGrabbable && _grabInput && YInput >= 0)
         {
-            Debug.Log("reached here");
             SwordCharaterStateMachine.ChangeState(SwordCharacter.WallGrabState);
         }
         else if (!_isGrounded)
