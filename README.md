@@ -1,7 +1,8 @@
-# metroidvania
-### Lista de Prototipação
+# Metroidvania Prototipação
 
-## Basic Controller
+## CheckList
+
+### Basic Controller
 - [x] StateMachine Player - 16/11/2020
 - [x] Run, Jump - 16/11/2020
 - [x] Double Jump - 17/11/2020
@@ -14,7 +15,7 @@
 - [ ] GroundDash/FDash/BDash
 - [ ] Attacking/Combo
 
-## Level Management & Level Design
+### Level Management & Level Design
 - [ ] Mini Map Level
 - [ ] Mini Map Indicator
 - [ ] Mini Map Icons
@@ -23,7 +24,7 @@
 - [ ] Map Tool Gizmo border to Clamp Camera
 - [ ] Map Tool Gizmo to select wich border loads scene
 
-## Character Management
+### Character Management
 - [ ] Character Stats Menu
 - [ ] Character Inventory
 - [ ] Relics ON/OFF
