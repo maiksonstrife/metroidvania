@@ -10,12 +10,11 @@
 - [x] WallClimb - 29/11/2020
 - [ ] WallJump
 - [ ] LedgeClimb/LedgeDrop
-- [ ] AirDash
+- [ ] Directional AirDash
 - [ ] GroundDash/FDash/BDash
 - [ ] Attacking/Combo
 
 ## Level Management & Level Design
-
 - [ ] Mini Map Level
 - [ ] Mini Map Indicator
 - [ ] Mini Map Icons
@@ -24,9 +23,7 @@
 - [ ] Map Tool Gizmo border to Clamp Camera
 - [ ] Map Tool Gizmo to select wich border loads scene
 
-
 ## Character Management
-
 - [ ] Character Stats Menu
 - [ ] Character Inventory
 - [ ] Relics ON/OFF
