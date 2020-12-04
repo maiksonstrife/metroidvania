@@ -31,7 +31,9 @@ public class SwordCharacter : MonoBehaviour
     [SerializeField]
     private Transform groundCheck;
     [SerializeField]
-    private Transform _wallCheck;
+    private Transform _wallCheck;    
+    [SerializeField]
+    private Transform _wallCheckAbove;
     #endregion
 
     #region Player Variables
@@ -66,7 +68,6 @@ public class SwordCharacter : MonoBehaviour
 
     private void Update()
     {
-        //Debug.DrawRay(_wallCheck.position, Vector2.right * FacingDirection * _characterData.WallCheckDistance, Color.cyan);
         CurrentVelocity = RB.velocity;
         StateMachine.CurrentState.LogicUpdate();
     }
@@ -106,6 +107,11 @@ public class SwordCharacter : MonoBehaviour
         return Physics2D.Raycast(_wallCheck.position, Vector2.right * FacingDirection, _characterData.WallCheckDistance, _characterData.WhatIsGround);
     }
 
+    public bool CheckIfTouchingWallAbove()
+    {
+        return Physics2D.Raycast(_wallCheckAbove.position, Vector2.right * FacingDirection, _characterData.WallCheckDistance, _characterData.WhatIsGround);
+    }
+
     public bool CheckIfIsGrabbable()
     {
         return Physics2D.Raycast(_wallCheck.position, Vector2.right * FacingDirection, _characterData.WallCheckDistance, _characterData.WhatIsGrabbable);
@@ -141,6 +147,10 @@ public class SwordCharacter : MonoBehaviour
 
         string checkWall = "Wall : " + CheckIfTouchingWall();
         GUI.Box(new Rect(465, 0, 125, 25), checkWall);
+
+        string checkWallAbove = "Wall Above: " + CheckIfTouchingWallAbove();
+        GUI.Box(new Rect(595, 0, 125, 25), checkWallAbove);
+
         _previousState = currentState;
     }
 #endif

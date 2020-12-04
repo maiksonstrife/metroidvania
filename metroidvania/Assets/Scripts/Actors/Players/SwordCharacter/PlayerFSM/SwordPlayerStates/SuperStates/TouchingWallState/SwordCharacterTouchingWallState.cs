@@ -6,6 +6,7 @@ public class SwordCharacterTouchingWallState : SwordCharaterState
 {
     protected bool IsGrounded;
     protected bool IsTouchingWall;
+    protected bool IsTouchingWallAbove;
     protected bool IsTouchingGrabbable;
     protected int XInput;
     protected int YInput;
@@ -31,6 +32,7 @@ public class SwordCharacterTouchingWallState : SwordCharaterState
         base.DoChecks();
         IsGrounded = SwordCharacter.CheckIfTouchingGround();
         IsTouchingWall = SwordCharacter.CheckIfTouchingWall();
+        IsTouchingWallAbove = SwordCharacter.CheckIfTouchingWallAbove();
         IsTouchingGrabbable = SwordCharacter.CheckIfIsGrabbable();
     }
 
@@ -51,11 +53,12 @@ public class SwordCharacterTouchingWallState : SwordCharaterState
         YInput = SwordCharacter.InputHandler.InputY;
         GrabInput = SwordCharacter.InputHandler.GrabInput;
         JumpInput = SwordCharacter.InputHandler.JumpInput;
+
         if (IsGrounded && !GrabInput)
         {
             SwordCharaterStateMachine.ChangeState(SwordCharacter.IdleState);
         }
-        else if (!IsTouchingWall && !IsTouchingGrabbable || XInput != SwordCharacter.FacingDirection && !GrabInput && !IsGrounded)
+        else if (!IsTouchingWall && !IsTouchingGrabbable || XInput != SwordCharacter.FacingDirection && !GrabInput)
         {
             SwordCharaterStateMachine.ChangeState(SwordCharacter.AirState);
         }

@@ -12,15 +12,17 @@ public class SwordCharacterWallClimbState : SwordCharacterTouchingWallState
     {
         base.LogicUpdate();
 
-        if(YInput > 0 && IsTouchingGrabbable && GrabInput) SwordCharacter.SetVelocityY(SwordCharacterData.WallClimbVelocity);
+        if (YInput == 0 && IsTouchingGrabbable && GrabInput || IsTouchingWallAbove && YInput > 0) SwordCharaterStateMachine.ChangeState(SwordCharacter.WallGrabState);
+        
+        if (YInput > 0 && IsTouchingGrabbable && GrabInput) SwordCharacter.SetVelocityY(SwordCharacterData.WallClimbVelocity);
         if(YInput < 0 && IsTouchingGrabbable && GrabInput) SwordCharacter.SetVelocityY(-SwordCharacterData.WallClimbVelocity);
 
-        if (!GrabInput) SwordCharaterStateMachine.ChangeState(SwordCharacter.AirState);
-        if(YInput < 0 && IsTouchingGrabbable && GrabInput && IsGrounded) 
+        //If player hold down while grabbing, it should stands idle
+        if(YInput < 0 && IsTouchingGrabbable && GrabInput && IsGrounded)
             SwordCharaterStateMachine.ChangeState(SwordCharacter.IdleState);
-        if (YInput == 0 && IsTouchingGrabbable && GrabInput || !IsTouchingGrabbable && IsTouchingWall && YInput > 0 && GrabInput) 
-            SwordCharaterStateMachine.ChangeState(SwordCharacter.WallGrabState);
-        if (!IsTouchingGrabbable && IsTouchingWall && XInput == SwordCharacter.FacingDirection && YInput < 0)
+
+        //Smooth transition between climb and slide
+        if ((IsTouchingGrabbable || IsTouchingWall) && !GrabInput && XInput == SwordCharacter.FacingDirection)
             SwordCharaterStateMachine.ChangeState(SwordCharacter.WallSlideState);
     }
 }
