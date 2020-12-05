@@ -36,7 +36,7 @@
 - [ ] Relics ON/OFF
 - [ ] Items Usage
 
-### Character Management
+### Config Specifics
 - [ ] Button Mapping
 - [ ] Sfx
 - [ ] Bgm
