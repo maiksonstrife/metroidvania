@@ -18,7 +18,7 @@ public class SwordCharacterWallClimbState : SwordCharacterTouchingWallState
         if(YInput < 0 && IsTouchingGrabbable && GrabInput) SwordCharacter.SetVelocityY(-SwordCharacterData.WallClimbVelocity);
 
         //If player hold down while grabbing, it should stands idle
-        if(YInput < 0 && IsTouchingGrabbable && GrabInput && IsGrounded)
+        if (YInput < 0 && IsTouchingGrabbable && GrabInput && IsGrounded)
             SwordCharaterStateMachine.ChangeState(SwordCharacter.IdleState);
 
         //Smooth transition between climb and slide

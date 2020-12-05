@@ -18,8 +18,6 @@ public class SwordCharacterData : ScriptableObject
 
     [Header("Wall Slide State")]
     public float WallSlideVelocity = 3f;    
-    
-    [Header("Wall Slide State")]
     public float WallClimbVelocity = 3f;
 
     [Header("Check Variables")]

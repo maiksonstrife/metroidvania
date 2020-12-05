@@ -17,8 +17,6 @@ public class SwordCharacter : MonoBehaviour
 
     [SerializeField]
     private SwordCharacterData _characterData;
-    private string _previousState;
-    private bool _canLog;
     #endregion
 
     #region Components
@@ -41,6 +39,11 @@ public class SwordCharacter : MonoBehaviour
     public Vector2 CurrentVelocity { get; private set; }
 
     private Vector2 _workSpace;
+    #endregion
+
+    #region Debugging
+    private string _previousState;
+    private bool _canLog;
     #endregion
 
     #region Unity Callback Functions
@@ -70,6 +73,7 @@ public class SwordCharacter : MonoBehaviour
     {
         CurrentVelocity = RB.velocity;
         StateMachine.CurrentState.LogicUpdate();
+        //Debug.DrawRay(_wallCheck.position, Vector2.right * FacingDirection * _characterData.WallCheckDistance, Color.cyan);
     }
 
     private void FixedUpdate() => StateMachine.CurrentState.PhysicsUpdate();
