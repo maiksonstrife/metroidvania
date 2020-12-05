@@ -35,7 +35,11 @@
 - [ ] Character Inventory
 - [ ] Relics ON/OFF
 - [ ] Items Usage
-- [ ] Config
+
+### Character Management
+- [ ] Button Mapping
+- [ ] Sfx
+- [ ] Bgm
 
 ### Level Management & Level Design
 - [ ] Mini Map Level
