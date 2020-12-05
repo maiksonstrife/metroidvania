@@ -18,13 +18,16 @@ public class SwordCharacterLandState : SwordCharacterGroundedState
     {
         base.LogicUpdate();
 
-        if (XInput != 0)
+        if (!isExitingState)
         {
-            SwordCharaterStateMachine.ChangeState(SwordCharacter.MoveState);
-        }
-        else if (isAnimationFinished)
-        {
-            SwordCharaterStateMachine.ChangeState(SwordCharacter.IdleState);
+            if (XInput != 0)
+            {
+                SwordCharaterStateMachine.ChangeState(SwordCharacter.MoveState);
+            }
+            else if (isAnimationFinished)
+            {
+                SwordCharaterStateMachine.ChangeState(SwordCharacter.IdleState);
+            }
         }
     }
 }

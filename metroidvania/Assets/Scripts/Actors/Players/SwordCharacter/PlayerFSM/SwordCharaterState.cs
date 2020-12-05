@@ -8,6 +8,7 @@ public class SwordCharaterState
     protected SwordCharaterStateMachine SwordCharaterStateMachine;
     protected SwordCharacterData SwordCharacterData;
     protected bool isAnimationFinished;
+    protected bool isExitingState;
     protected float startTime;
     private string _animBoolName;
 
@@ -25,11 +26,13 @@ public class SwordCharaterState
         SwordCharacter.Anim.SetBool(_animBoolName, true);
         startTime = Time.time;
         isAnimationFinished = false;
+        isExitingState = false;
     }
 
     public virtual void Exit()
     {
         SwordCharacter.Anim.SetBool(_animBoolName, false);
+        isExitingState = true;
     }
 
     public virtual void LogicUpdate() { }

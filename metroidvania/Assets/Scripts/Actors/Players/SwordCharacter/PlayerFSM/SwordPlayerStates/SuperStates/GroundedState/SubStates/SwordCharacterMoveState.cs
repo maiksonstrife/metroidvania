@@ -15,6 +15,6 @@ public class SwordCharacterMoveState : SwordCharacterGroundedState
         
         SwordCharacter.CheckIfShouldFlip(XInput);
         SwordCharacter.SetVelocityX(SwordCharacterData.MovementVelocity * XInput);
-        if (XInput == 0) SwordCharaterStateMachine.ChangeState(SwordCharacter.IdleState);
+        if (XInput == 0 && !isExitingState) SwordCharaterStateMachine.ChangeState(SwordCharacter.IdleState);
     }
 }

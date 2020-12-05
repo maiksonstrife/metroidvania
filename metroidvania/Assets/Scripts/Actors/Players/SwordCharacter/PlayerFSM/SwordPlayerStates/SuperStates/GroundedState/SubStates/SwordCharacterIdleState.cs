@@ -19,6 +19,6 @@ public class SwordCharacterIdleState : SwordCharacterGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if (XInput != 0) SwordCharaterStateMachine.ChangeState(SwordCharacter.MoveState);
+        if (XInput != 0 && !isExitingState) SwordCharaterStateMachine.ChangeState(SwordCharacter.MoveState);
     }
 }
