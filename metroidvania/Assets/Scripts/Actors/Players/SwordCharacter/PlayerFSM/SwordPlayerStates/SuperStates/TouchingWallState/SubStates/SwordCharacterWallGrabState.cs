@@ -42,16 +42,14 @@ public class SwordCharacterWallGrabState : SwordCharacterTouchingWallState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        if (isExitingState) return;
+        
         HoldPosition();
-
-        if (!isExitingState)
-        {
-            if (YInput > 0 && IsTouchingGrabbable && GrabInput && !IsTouchingWallAbove)
-                SwordCharaterStateMachine.ChangeState(SwordCharacter.WallClimbState);
-            if (YInput < 0 && IsTouchingGrabbable && GrabInput)
-                SwordCharaterStateMachine.ChangeState(SwordCharacter.WallClimbState);
-            if (!GrabInput) SwordCharaterStateMachine.ChangeState(SwordCharacter.AirState);
-        }
+        if (YInput > 0 && IsTouchingGrabbable && GrabInput && !IsTouchingWallAbove)
+            SwordCharaterStateMachine.ChangeState(SwordCharacter.WallClimbState);
+        if (YInput < 0 && IsTouchingGrabbable && GrabInput)
+            SwordCharaterStateMachine.ChangeState(SwordCharacter.WallClimbState);
+        if (!GrabInput) SwordCharaterStateMachine.ChangeState(SwordCharacter.AirState);
     }
 
     private void HoldPosition()

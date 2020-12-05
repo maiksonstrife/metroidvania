@@ -17,17 +17,9 @@ public class SwordCharacterLandState : SwordCharacterGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        if (isExitingState) return;
 
-        if (!isExitingState)
-        {
-            if (XInput != 0)
-            {
-                SwordCharaterStateMachine.ChangeState(SwordCharacter.MoveState);
-            }
-            else if (isAnimationFinished)
-            {
-                SwordCharaterStateMachine.ChangeState(SwordCharacter.IdleState);
-            }
-        }
+        if (XInput != 0) SwordCharaterStateMachine.ChangeState(SwordCharacter.MoveState);
+        else if (isAnimationFinished) SwordCharaterStateMachine.ChangeState(SwordCharacter.IdleState);
     }
 }

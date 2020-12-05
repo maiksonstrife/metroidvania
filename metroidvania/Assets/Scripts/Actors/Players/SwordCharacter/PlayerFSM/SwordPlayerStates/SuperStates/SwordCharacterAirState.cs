@@ -8,6 +8,7 @@ public class SwordCharacterAirState : SwordCharaterState
     private bool _grabInput;
     private bool _isGrounded;
     private bool _isTouchingWall;
+    private bool _isTouchingWallBack;
     private bool _isTouchingGrabbable;
     private bool _jumpInput;
     private bool _coyoteTime;
@@ -24,6 +25,7 @@ public class SwordCharacterAirState : SwordCharaterState
         _isGrounded = SwordCharacter.CheckIfTouchingGround();
         _isTouchingWall = SwordCharacter.CheckIfTouchingWall();
         _isTouchingGrabbable = SwordCharacter.CheckIfIsGrabbable();
+        _isTouchingWallBack = SwordCharacter.CheckIfTouchingWallBack();
     }
 
     public override void LogicUpdate()
@@ -41,10 +43,16 @@ public class SwordCharacterAirState : SwordCharaterState
         {
             SwordCharaterStateMachine.ChangeState(SwordCharacter.LandState);
         }
+        else if (_jumpInput && (_isTouchingWall || _isTouchingGrabbable || _isTouchingWallBack))
+        {
+            _isTouchingWall = SwordCharacter.CheckIfTouchingWall(); //update info in Update to increase accuracy
+            _isTouchingGrabbable = SwordCharacter.CheckIfIsGrabbable();
+            SwordCharacter.WallJumpState.CheckWallJumpDirection(_isTouchingGrabbable|| _isTouchingWall);
+            SwordCharaterStateMachine.ChangeState(SwordCharacter.WallJumpState);
+        }
         else if (SwordCharacterData.canDoubleJump && _jumpInput && SwordCharacter.JumpState.CanJump())
         {
             SwordCharacter.Anim.SetTrigger("isDoubleJumpTrigger");
-            SwordCharacter.InputHandler.JumpButtonUsed();
             SwordCharaterStateMachine.ChangeState(SwordCharacter.JumpState);
         }
         else if (_isTouchingGrabbable && _grabInput)

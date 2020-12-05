@@ -20,6 +20,11 @@ public class SwordCharacterData : ScriptableObject
     public float WallSlideVelocity = 3f;    
     public float WallClimbVelocity = 3f;
 
+    [Header("Wall Jump State")]
+    public float WallJumpVelocity = 20f;
+    public float WallJumpTime = 0.4f;
+    public Vector2 WallJumpAngle = new Vector2(1, 2);
+
     [Header("Check Variables")]
     public float GroundCheckRadius = 0.2f;
     public float WallCheckDistance = 0.5f;

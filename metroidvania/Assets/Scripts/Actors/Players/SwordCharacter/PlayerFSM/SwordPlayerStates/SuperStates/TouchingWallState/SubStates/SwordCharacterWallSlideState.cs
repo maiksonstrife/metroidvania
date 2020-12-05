@@ -10,8 +10,9 @@ public class SwordCharacterWallSlideState : SwordCharacterTouchingWallState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        SwordCharacter.SetVelocityY(-SwordCharacterData.WallSlideVelocity);
+        if (isExitingState) return;
 
-        if (GrabInput && IsTouchingGrabbable && !isExitingState) SwordCharaterStateMachine.ChangeState(SwordCharacter.WallGrabState);
+        SwordCharacter.SetVelocityY(-SwordCharacterData.WallSlideVelocity);
+        if (GrabInput && IsTouchingGrabbable) SwordCharaterStateMachine.ChangeState(SwordCharacter.WallGrabState);
     }
 }

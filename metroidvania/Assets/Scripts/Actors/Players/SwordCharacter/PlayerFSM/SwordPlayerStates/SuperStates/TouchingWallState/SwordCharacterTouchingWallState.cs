@@ -54,7 +54,12 @@ public class SwordCharacterTouchingWallState : SwordCharaterState
         GrabInput = SwordCharacter.InputHandler.GrabInput;
         JumpInput = SwordCharacter.InputHandler.JumpInput;
 
-        if (IsGrounded && !GrabInput)
+        if (JumpInput)
+        {
+            SwordCharacter.WallJumpState.CheckWallJumpDirection(IsTouchingWall || IsTouchingGrabbable);
+            SwordCharaterStateMachine.ChangeState(SwordCharacter.WallJumpState);
+        }
+        else if (IsGrounded && !GrabInput)
         {
             SwordCharaterStateMachine.ChangeState(SwordCharacter.IdleState);
         }

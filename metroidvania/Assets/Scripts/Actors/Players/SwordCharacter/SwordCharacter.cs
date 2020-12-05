@@ -14,6 +14,7 @@ public class SwordCharacter : MonoBehaviour
     public SwordCharacterWallSlideState WallSlideState { get; private set; }
     public SwordCharacterWallGrabState WallGrabState { get; private set; }
     public SwordCharacterWallClimbState WallClimbState { get; private set; }
+    public SwordCharacterWallJumpState WallJumpState { get; private set; }
 
     [SerializeField]
     private SwordCharacterData _characterData;
@@ -59,6 +60,7 @@ public class SwordCharacter : MonoBehaviour
         WallSlideState = new SwordCharacterWallSlideState(this, StateMachine, _characterData, "wallSlide");
         WallGrabState = new SwordCharacterWallGrabState(this, StateMachine, _characterData, "wallGrab");
         WallClimbState = new SwordCharacterWallClimbState(this, StateMachine, _characterData, "wallClimb");
+        WallJumpState = new SwordCharacterWallJumpState(this, StateMachine, _characterData, "inAir");
     }
 
     private void Start()
@@ -80,6 +82,14 @@ public class SwordCharacter : MonoBehaviour
     #endregion
 
     #region Set Functions
+    public void SetVelocityAngular(float velocity, Vector2 angle, int direction)
+    {
+        angle.Normalize();
+        _workSpace.Set(angle.x * velocity * direction, angle.y * velocity);
+        RB.velocity = _workSpace;
+        CurrentVelocity = _workSpace;
+    }
+
     public void SetVelocityX(float velocity)
     {
         _workSpace.Set(velocity, CurrentVelocity.y);
@@ -114,6 +124,13 @@ public class SwordCharacter : MonoBehaviour
     public bool CheckIfTouchingWallAbove()
     {
         return Physics2D.Raycast(_wallCheckAbove.position, Vector2.right * FacingDirection, _characterData.WallCheckDistance, _characterData.WhatIsGround);
+    }
+
+    public bool CheckIfTouchingWallBack()
+    {
+        if (Physics2D.Raycast(_wallCheck.position, Vector2.right * -FacingDirection, _characterData.WallCheckDistance, _characterData.WhatIsGround)) return true;
+        if (Physics2D.Raycast(_wallCheck.position, Vector2.right * -FacingDirection, _characterData.WallCheckDistance, _characterData.WhatIsGrabbable)) return true;
+        else return false;
     }
 
     public bool CheckIfIsGrabbable()
@@ -154,6 +171,9 @@ public class SwordCharacter : MonoBehaviour
 
         string checkWallAbove = "Wall Above: " + CheckIfTouchingWallAbove();
         GUI.Box(new Rect(595, 0, 125, 25), checkWallAbove);
+
+        string checkWallBack = "Wall Back: " + CheckIfTouchingWallBack();
+        GUI.Box(new Rect(730, 0, 125, 25), checkWallBack);
 
         _previousState = currentState;
     }

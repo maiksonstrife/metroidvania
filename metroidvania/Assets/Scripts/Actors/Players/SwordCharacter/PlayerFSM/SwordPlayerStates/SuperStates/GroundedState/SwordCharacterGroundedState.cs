@@ -39,7 +39,6 @@ public class SwordCharacterGroundedState : SwordCharaterState
 
         if (_jumpInput && SwordCharacter.JumpState.CanJump())
         {
-            SwordCharacter.InputHandler.JumpButtonUsed();
             SwordCharaterStateMachine.ChangeState(SwordCharacter.JumpState);
         }
         else if (_isGrabbable && _grabInput && YInput >= 0)
