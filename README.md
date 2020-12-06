@@ -9,7 +9,7 @@
 - [x] WallGrab - 29/11/2020
 - [x] WallSlide - 29/11/2020
 - [x] WallClimb - 29/11/2020
-- [ ] WallJump
+- [x] WallJump - 05/12/2020
 - [ ] LedgeClimb/LedgeDrop
 - [ ] Directional AirDash
 - [ ] GroundDash/FDash/BDash
