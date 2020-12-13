@@ -10,6 +10,8 @@ public class SwordCharacterAirState : SwordCharaterState
     private bool _isTouchingWall;
     private bool _isTouchingWallBack;
     private bool _isTouchingGrabbable;
+    private bool _isTouchingWallAbove;
+    private bool _isTouchingGrabbableAbove;
     private bool _jumpInput;
     private bool _coyoteTime;
     private bool _isJumping;
@@ -26,6 +28,13 @@ public class SwordCharacterAirState : SwordCharaterState
         _isTouchingWall = SwordCharacter.CheckIfTouchingWall();
         _isTouchingGrabbable = SwordCharacter.CheckIfIsGrabbable();
         _isTouchingWallBack = SwordCharacter.CheckIfTouchingWallBack();
+        _isTouchingWallAbove = SwordCharacter.CheckIfTouchingWallAbove();
+        _isTouchingGrabbableAbove = SwordCharacter.CheckIfTouchingGrabbableAbove();
+
+        if ((_isTouchingWall || _isTouchingGrabbable) && !_isTouchingWallAbove && !_isTouchingGrabbableAbove)
+        {
+            SwordCharacter.LedgeCLimbState.SetDetectedPosition(SwordCharacter.transform.position);
+        }
     }
 
     public override void LogicUpdate()
@@ -42,8 +51,11 @@ public class SwordCharacterAirState : SwordCharaterState
         if (_isGrounded && SwordCharacter.CurrentVelocity.y < 0.01f)
         {
             SwordCharaterStateMachine.ChangeState(SwordCharacter.LandState);
+        }else if ((_isTouchingWall || _isTouchingGrabbable) && !_isTouchingWallAbove && !_isTouchingGrabbableAbove)
+        {
+            SwordCharaterStateMachine.ChangeState(SwordCharacter.LedgeCLimbState);
         }
-        else if (_jumpInput && (_isTouchingWall || _isTouchingGrabbable || _isTouchingWallBack))
+        else if (SwordCharacterData.canWallJump && _jumpInput && _xInput == SwordCharacter.FacingDirection && (_isTouchingWall || _isTouchingGrabbable || _isTouchingWallBack))
         {
             _isTouchingWall = SwordCharacter.CheckIfTouchingWall(); //update info in Update to increase accuracy
             _isTouchingGrabbable = SwordCharacter.CheckIfIsGrabbable();
@@ -99,4 +111,12 @@ public class SwordCharacterAirState : SwordCharaterState
 
     public void StartCoyoteTime() => _coyoteTime = true;
     public void SetIsJumping() => _isJumping = true;
+
+    public override void Exit()
+    {
+        base.Exit();
+        _isTouchingGrabbable = false;
+        _isTouchingWall = false;
+        _isTouchingWallBack = false;
+    }
 }

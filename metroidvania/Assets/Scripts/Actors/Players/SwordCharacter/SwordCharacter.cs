@@ -15,6 +15,7 @@ public class SwordCharacter : MonoBehaviour
     public SwordCharacterWallGrabState WallGrabState { get; private set; }
     public SwordCharacterWallClimbState WallClimbState { get; private set; }
     public SwordCharacterWallJumpState WallJumpState { get; private set; }
+    public SwordCharacterLedgeClimbState LedgeCLimbState { get; private set; }
 
     [SerializeField]
     private SwordCharacterData _characterData;
@@ -61,6 +62,7 @@ public class SwordCharacter : MonoBehaviour
         WallGrabState = new SwordCharacterWallGrabState(this, StateMachine, _characterData, "wallGrab");
         WallClimbState = new SwordCharacterWallClimbState(this, StateMachine, _characterData, "wallClimb");
         WallJumpState = new SwordCharacterWallJumpState(this, StateMachine, _characterData, "inAir");
+        LedgeCLimbState = new SwordCharacterLedgeClimbState(this, StateMachine, _characterData, "ledgeClimb");
     }
 
     private void Start()
@@ -103,6 +105,12 @@ public class SwordCharacter : MonoBehaviour
         RB.velocity = _workSpace;
         CurrentVelocity = _workSpace;
     }
+
+    public void SetVelocityZero()
+    {
+        RB.velocity = Vector2.zero;
+        CurrentVelocity = Vector2.zero;
+    }
     #endregion
 
     #region Check Functions
@@ -126,6 +134,11 @@ public class SwordCharacter : MonoBehaviour
         return Physics2D.Raycast(_wallCheckAbove.position, Vector2.right * FacingDirection, _characterData.WallCheckDistance, _characterData.WhatIsGround);
     }
 
+    public bool CheckIfTouchingGrabbableAbove()
+    {
+        return Physics2D.Raycast(_wallCheckAbove.position, Vector2.right * FacingDirection, _characterData.WallCheckDistance, _characterData.WhatIsGrabbable);
+    }
+
     public bool CheckIfTouchingWallBack()
     {
         if (Physics2D.Raycast(_wallCheck.position, Vector2.right * -FacingDirection, _characterData.WallCheckDistance, _characterData.WhatIsGround)) return true;
@@ -146,6 +159,19 @@ public class SwordCharacter : MonoBehaviour
     {
         FacingDirection *= -1;
         transform.Rotate(0.0f, 180.0f, 0.0f);
+    }
+
+    public Vector2 DetermineCornerPosition()
+    {
+        RaycastHit2D xHit = Physics2D.Raycast(_wallCheck.position, Vector2.right * FacingDirection, _characterData.WallCheckDistance, _characterData.WhatIsGround);
+        float xDist = xHit.distance;
+        _workSpace.Set(xDist * FacingDirection, 0f);
+
+        RaycastHit2D yHit = Physics2D.Raycast(_wallCheckAbove.position + (Vector3) _workSpace, Vector2.down, _wallCheckAbove.position.y - _wallCheck.position.y, _characterData.WhatIsGround);
+        float yDist = yHit.distance;
+
+        _workSpace.Set(_wallCheck.position.x + (xDist * FacingDirection), _wallCheckAbove.position.y - yDist);
+        return _workSpace;
     }
     #endregion
 

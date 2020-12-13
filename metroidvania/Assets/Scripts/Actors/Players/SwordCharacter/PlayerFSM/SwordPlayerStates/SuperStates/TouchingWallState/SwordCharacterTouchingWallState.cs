@@ -8,6 +8,7 @@ public class SwordCharacterTouchingWallState : SwordCharaterState
     protected bool IsTouchingWall;
     protected bool IsTouchingWallAbove;
     protected bool IsTouchingGrabbable;
+    protected bool IsTouchingGrabbableAbove;
     protected int XInput;
     protected int YInput;
     protected bool GrabInput;
@@ -34,6 +35,12 @@ public class SwordCharacterTouchingWallState : SwordCharaterState
         IsTouchingWall = SwordCharacter.CheckIfTouchingWall();
         IsTouchingWallAbove = SwordCharacter.CheckIfTouchingWallAbove();
         IsTouchingGrabbable = SwordCharacter.CheckIfIsGrabbable();
+        IsTouchingGrabbableAbove = SwordCharacter.CheckIfTouchingGrabbableAbove();
+
+        if ((IsTouchingWall || IsTouchingGrabbable) && !IsTouchingWallAbove && !IsTouchingGrabbableAbove)
+        {
+            SwordCharacter.LedgeCLimbState.SetDetectedPosition(SwordCharacter.transform.position);
+        }
     }
 
     public override void Enter()
@@ -54,7 +61,7 @@ public class SwordCharacterTouchingWallState : SwordCharaterState
         GrabInput = SwordCharacter.InputHandler.GrabInput;
         JumpInput = SwordCharacter.InputHandler.JumpInput;
 
-        if (JumpInput)
+        if (JumpInput && SwordCharacterData.canWallJump)
         {
             SwordCharacter.WallJumpState.CheckWallJumpDirection(IsTouchingWall || IsTouchingGrabbable);
             SwordCharaterStateMachine.ChangeState(SwordCharacter.WallJumpState);
@@ -66,6 +73,10 @@ public class SwordCharacterTouchingWallState : SwordCharaterState
         else if (!IsTouchingWall && !IsTouchingGrabbable || XInput != SwordCharacter.FacingDirection && !GrabInput)
         {
             SwordCharaterStateMachine.ChangeState(SwordCharacter.AirState);
+        }
+        else if ((IsTouchingWall || IsTouchingGrabbable) && !IsTouchingWallAbove && !IsTouchingGrabbableAbove)
+        {
+            SwordCharaterStateMachine.ChangeState(SwordCharacter.LedgeCLimbState);
         }
     }
 

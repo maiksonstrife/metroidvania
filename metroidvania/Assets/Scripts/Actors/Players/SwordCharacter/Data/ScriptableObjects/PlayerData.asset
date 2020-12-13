@@ -20,8 +20,11 @@ MonoBehaviour:
   WallSlideVelocity: 3
   WallClimbVelocity: 3
   WallJumpVelocity: 22
-  WallJumpTime: 0.2
-  WallJumpAngle: {x: 0.3, y: 2}
+  WallJumpTime: 0.1
+  WallJumpAngle: {x: 0.3, y: 0.4}
+  StartOffset: {x: 0.4, y: 0.9}
+  StopOffset: {x: 0.4, y: 2}
+  OffsetTransition: 4
   GroundCheckRadius: 0.2
   WallCheckDistance: 0.5
   WhatIsGround:
@@ -32,3 +35,4 @@ MonoBehaviour:
     m_Bits: 512
   canSlide: 1
   canDoubleJump: 1
+  canWallJump: 1

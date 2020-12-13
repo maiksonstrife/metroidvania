@@ -21,9 +21,14 @@ public class SwordCharacterData : ScriptableObject
     public float WallClimbVelocity = 3f;
 
     [Header("Wall Jump State")]
-    public float WallJumpVelocity = 20f;
-    public float WallJumpTime = 0.4f;
-    public Vector2 WallJumpAngle = new Vector2(1, 2);
+    public float WallJumpVelocity = 22f;
+    public float WallJumpTime = 0.1f;
+    public Vector2 WallJumpAngle = new Vector2(0.3f, 1.5f);
+
+    [Header("Ledge Climb State")]
+    public Vector2 StartOffset;
+    public Vector2 StopOffset;
+    public float OffsetTransition;
 
     [Header("Check Variables")]
     public float GroundCheckRadius = 0.2f;
@@ -34,4 +39,5 @@ public class SwordCharacterData : ScriptableObject
     [Header("Relics Unlock")]
     public bool canSlide = false;
     public bool canDoubleJump = false;
+    public bool canWallJump = false;
 }

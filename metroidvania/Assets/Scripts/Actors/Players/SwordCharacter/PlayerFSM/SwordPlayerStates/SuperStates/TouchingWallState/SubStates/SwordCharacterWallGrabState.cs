@@ -55,8 +55,7 @@ public class SwordCharacterWallGrabState : SwordCharacterTouchingWallState
     private void HoldPosition()
     {
         SwordCharacter.transform.position = _holdPosition;
-        SwordCharacter.SetVelocityX(0f);
-        SwordCharacter.SetVelocityY(0f);
+        SwordCharacter.SetVelocityZero();
     }
 
     public override void PhysicsUpdate()
