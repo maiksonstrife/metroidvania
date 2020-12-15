@@ -167,7 +167,7 @@ public class SwordCharacter : MonoBehaviour
         float xDist = xHit.distance;
         _workSpace.Set(xDist * FacingDirection, 0f);
 
-        RaycastHit2D yHit = Physics2D.Raycast(_wallCheckAbove.position + (Vector3) _workSpace, Vector2.down, _wallCheckAbove.position.y - _wallCheck.position.y, _characterData.WhatIsGround);
+        RaycastHit2D yHit = Physics2D.Raycast(_wallCheckAbove.position + (Vector3) (_workSpace), Vector2.down, _wallCheckAbove.position.y - _wallCheck.position.y, _characterData.WhatIsGround);
         float yDist = yHit.distance;
 
         _workSpace.Set(_wallCheck.position.x + (xDist * FacingDirection), _wallCheckAbove.position.y - yDist);

@@ -12,6 +12,7 @@ public class SwordCharacterLedgeClimbState : SwordCharaterState
     private bool _isClimbing;
     private int _xInput;
     private int _yInput;
+    private bool _jumpInput;
     private float _timer;
     private float _inputDelay = 0.2f;
 
@@ -37,8 +38,8 @@ public class SwordCharacterLedgeClimbState : SwordCharaterState
         base.Enter();
         SwordCharacter.SetVelocityZero();
         SwordCharacter.transform.position = _detectedPos;
-
         _cornerPos = SwordCharacter.DetermineCornerPosition();
+
         _startPos.Set(_cornerPos.x - (SwordCharacter.FacingDirection * SwordCharacterData.StartOffset.x), _cornerPos.y - SwordCharacterData.StartOffset.y);
         _stopPos.Set(_cornerPos.x + (SwordCharacter.FacingDirection * SwordCharacterData.StopOffset.x), _cornerPos.y + SwordCharacterData.StartOffset.y);
         SwordCharacter.transform.position = _startPos;
@@ -66,6 +67,7 @@ public class SwordCharacterLedgeClimbState : SwordCharaterState
         {
             _xInput = SwordCharacter.InputHandler.InputX;
             _yInput = SwordCharacter.InputHandler.InputY;
+            _jumpInput = SwordCharacter.InputHandler.JumpInput;
             SwordCharacter.SetVelocityZero();
 
             if (!_isClimbing) SwordCharacter.transform.position = _startPos;
@@ -80,6 +82,11 @@ public class SwordCharacterLedgeClimbState : SwordCharaterState
             {
                 SwordCharaterStateMachine.ChangeState(SwordCharacter.AirState);
             }
+            //else if(_jumpInput && !_isClimbing && Time.time > _timer + _inputDelay)
+            //{
+            //    SwordCharacter.WallJumpState.CheckWallJumpDirection(true);
+            //    SwordCharaterStateMachine.ChangeState(SwordCharacter.WallJumpState);
+            //}
         }
     }
 

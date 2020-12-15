@@ -51,7 +51,8 @@ public class SwordCharacterAirState : SwordCharaterState
         if (_isGrounded && SwordCharacter.CurrentVelocity.y < 0.01f)
         {
             SwordCharaterStateMachine.ChangeState(SwordCharacter.LandState);
-        }else if ((_isTouchingWall || _isTouchingGrabbable) && !_isTouchingWallAbove && !_isTouchingGrabbableAbove)
+        }
+        else if ((_isTouchingWall || _isTouchingGrabbable) && !_isTouchingWallAbove && !_isTouchingGrabbableAbove && !_isGrounded)
         {
             SwordCharaterStateMachine.ChangeState(SwordCharacter.LedgeCLimbState);
         }
@@ -67,7 +68,7 @@ public class SwordCharacterAirState : SwordCharaterState
             SwordCharacter.Anim.SetTrigger("isDoubleJumpTrigger");
             SwordCharaterStateMachine.ChangeState(SwordCharacter.JumpState);
         }
-        else if (_isTouchingGrabbable && _grabInput)
+        else if (_isTouchingGrabbable && _grabInput && _isTouchingWallAbove)
         {
             SwordCharaterStateMachine.ChangeState(SwordCharacter.WallGrabState);
         }

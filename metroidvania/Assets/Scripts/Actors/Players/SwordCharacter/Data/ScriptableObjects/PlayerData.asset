@@ -23,7 +23,7 @@ MonoBehaviour:
   WallJumpTime: 0.1
   WallJumpAngle: {x: 0.3, y: 0.4}
   StartOffset: {x: 0.4, y: 0.9}
-  StopOffset: {x: 0.4, y: 2}
+  StopOffset: {x: 0.4, y: 0.9}
   OffsetTransition: 4
   GroundCheckRadius: 0.2
   WallCheckDistance: 0.5
