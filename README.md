@@ -10,9 +10,9 @@
 - [x] WallSlide - 29/11/2020
 - [x] WallClimb - 29/11/2020
 - [x] WallJump - 05/12/2020
-- [ ] LedgeClimb/LedgeDrop
+- [x] LedgeClimb/LedgeDrop - 13/12/2020
 - [ ] Directional AirDash
-- [ ] GroundDash/FDash/BDash
+- [ ] GroundDash
 - [ ] Attacking/Combo
 - [ ] Save - Character State & Location
 
