@@ -87,6 +87,7 @@ public class SwordCharacterAirDashState : SwordCharacterAbilityState
     {
         if(Vector2.Distance(SwordCharacter.transform.position, _lastAfterImagePos) >= SwordCharacterData.DistBetweenAfterImages)
         {
+            Debug.Log("is reachiing here ?");
             PlaceAfterImage();
         }
     }

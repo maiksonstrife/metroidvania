@@ -25,6 +25,14 @@ MonoBehaviour:
   StartOffset: {x: 0.4, y: 0.9}
   StopOffset: {x: 0.4, y: 0.9}
   OffsetTransition: 4
+  AirDashCooldown: 0.5
+  AirDashMaxHoldTime: 1
+  HoldTimeScale: 0.25
+  AirDashTimeDistance: 0.2
+  AirDashVelocity: 30
+  Drag: 10
+  DashEndYMultiplier: 0.2
+  DistBetweenAfterImages: 1
   GroundCheckRadius: 0.2
   WallCheckDistance: 0.5
   WhatIsGround:
