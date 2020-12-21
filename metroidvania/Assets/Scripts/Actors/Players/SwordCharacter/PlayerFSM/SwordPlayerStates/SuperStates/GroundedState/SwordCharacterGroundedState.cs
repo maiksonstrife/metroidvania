@@ -9,6 +9,7 @@ public class SwordCharacterGroundedState : SwordCharaterState
     protected int YInput;
     private bool _jumpInput;
     private bool _grabInput;
+    private bool _dashInput;
     private bool _isGrounded;
     private bool _isGrabbable;
     private bool _isTouchingWallAbove;
@@ -29,6 +30,7 @@ public class SwordCharacterGroundedState : SwordCharaterState
     {
         base.Enter();
         SwordCharacter.JumpState.ResetAmountOfJumpsLeft();
+        SwordCharacter.DashState.ResetCanDash();
     }
 
     public override void LogicUpdate()
@@ -38,6 +40,7 @@ public class SwordCharacterGroundedState : SwordCharaterState
         YInput = SwordCharacter.InputHandler.InputY;
         _jumpInput = SwordCharacter.InputHandler.JumpInput;
         _grabInput = SwordCharacter.InputHandler.GrabInput;
+        _dashInput = SwordCharacter.InputHandler.DashInput;
 
         if (_jumpInput && SwordCharacter.JumpState.CanJump())
         {
@@ -53,6 +56,9 @@ public class SwordCharacterGroundedState : SwordCharaterState
             SwordCharacter.AirState.StartCoyoteTime();
             SwordCharaterStateMachine.ChangeState(SwordCharacter.AirState);
         }
-
+        else if (_dashInput && SwordCharacter.DashState.CheckIfCanDash())
+        {
+            SwordCharaterStateMachine.ChangeState(SwordCharacter.DashState);
+        }
     }
 }

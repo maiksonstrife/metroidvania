@@ -16,6 +16,7 @@ public class SwordCharacter : MonoBehaviour
     public SwordCharacterWallClimbState WallClimbState { get; private set; }
     public SwordCharacterWallJumpState WallJumpState { get; private set; }
     public SwordCharacterLedgeClimbState LedgeCLimbState { get; private set; }
+    public SwordCharacterAirDashState DashState { get; private set; }
 
     [SerializeField]
     private SwordCharacterData _characterData;
@@ -29,7 +30,7 @@ public class SwordCharacter : MonoBehaviour
 
     #region Check Transforms
     [SerializeField]
-    private Transform groundCheck;
+    private Transform _groundCheck;
     [SerializeField]
     private Transform _wallCheck;    
     [SerializeField]
@@ -63,6 +64,7 @@ public class SwordCharacter : MonoBehaviour
         WallClimbState = new SwordCharacterWallClimbState(this, StateMachine, _characterData, "wallClimb");
         WallJumpState = new SwordCharacterWallJumpState(this, StateMachine, _characterData, "inAir");
         LedgeCLimbState = new SwordCharacterLedgeClimbState(this, StateMachine, _characterData, "ledgeClimb");
+        DashState = new SwordCharacterAirDashState(this, StateMachine, _characterData, "inAir");
     }
 
     private void Start()
@@ -92,6 +94,13 @@ public class SwordCharacter : MonoBehaviour
         CurrentVelocity = _workSpace;
     }
 
+    public void SetVelocityEightDirectional(float velocity, Vector2 direction)
+    {
+        _workSpace = direction * velocity;
+        RB.velocity = _workSpace;
+        CurrentVelocity = _workSpace;
+    }
+
     public void SetVelocityX(float velocity)
     {
         _workSpace.Set(velocity, CurrentVelocity.y);
@@ -116,7 +125,7 @@ public class SwordCharacter : MonoBehaviour
     #region Check Functions
     public bool CheckIfTouchingGround()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, _characterData.GroundCheckRadius, _characterData.WhatIsGround);
+        return Physics2D.OverlapCircle(_groundCheck.position, _characterData.GroundCheckRadius, _characterData.WhatIsGround);
     }
 
     public void CheckIfShouldFlip(int XInput)

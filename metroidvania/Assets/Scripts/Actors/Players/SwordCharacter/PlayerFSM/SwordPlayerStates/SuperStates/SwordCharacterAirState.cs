@@ -4,18 +4,22 @@ using UnityEngine;
 
 public class SwordCharacterAirState : SwordCharaterState
 {
+    //Input
     private int _xInput;
     private bool _grabInput;
+    private bool _jumpInput;
+    private bool _jumpInputStop;
+    private bool _dashInput;
+
+    //Checks
     private bool _isGrounded;
     private bool _isTouchingWall;
     private bool _isTouchingWallBack;
     private bool _isTouchingGrabbable;
     private bool _isTouchingWallAbove;
     private bool _isTouchingGrabbableAbove;
-    private bool _jumpInput;
     private bool _coyoteTime;
     private bool _isJumping;
-    private bool _jumpInputStop;
 
     public SwordCharacterAirState(SwordCharacter swordCharacter, SwordCharaterStateMachine statemachine, SwordCharacterData swordCharacterData, string _animBoolName) : base(swordCharacter, statemachine, swordCharacterData, _animBoolName)
     {
@@ -45,6 +49,7 @@ public class SwordCharacterAirState : SwordCharaterState
         _jumpInput = SwordCharacter.InputHandler.JumpInput;
         _jumpInputStop = SwordCharacter.InputHandler.JumpInputStop;
         _grabInput = SwordCharacter.InputHandler.GrabInput;
+        _dashInput = SwordCharacter.InputHandler.DashInput;
 
         CheckJumpMultiplier();
 
@@ -75,6 +80,10 @@ public class SwordCharacterAirState : SwordCharaterState
         else if ((_isTouchingWall || _isTouchingGrabbable) && _xInput == SwordCharacter.FacingDirection && SwordCharacter.CurrentVelocity.y <= 0 && SwordCharacterData.canSlide)
         {
             SwordCharaterStateMachine.ChangeState(SwordCharacter.WallSlideState);
+        }
+        else if (_dashInput && SwordCharacter.DashState.CheckIfCanDash())
+        {
+            SwordCharaterStateMachine.ChangeState(SwordCharacter.DashState);
         }
         else
         {
