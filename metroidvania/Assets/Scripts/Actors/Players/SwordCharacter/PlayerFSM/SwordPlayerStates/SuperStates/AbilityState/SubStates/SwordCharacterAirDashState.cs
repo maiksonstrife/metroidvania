@@ -20,7 +20,6 @@ public class SwordCharacterAirDashState : SwordCharacterAbilityState
         base.Enter();
         CanAirDash = false; //As we enter we used our dash
         SwordCharacter.InputHandler.DashInputUsed(); //Let the input known
-        SwordCharacter.cameraController.CameraShake(SwordCharacterData.CameraShakeDuration, SwordCharacterData.CameraShakeAmplitude, SwordCharacterData.CameraShakeFrequency);
         _isHolding = true; //The current state
         _airDashDirection = Vector2.right * SwordCharacter.FacingDirection; //dash direction
         Time.timeScale = SwordCharacterData.HoldTimeScale; //Bullet Time
@@ -88,6 +87,7 @@ public class SwordCharacterAirDashState : SwordCharacterAbilityState
     {
         if(Vector2.Distance(SwordCharacter.transform.position, _lastAfterImagePos) >= SwordCharacterData.DistBetweenAfterImages)
         {
+            Debug.Log("is reachiing here ?");
             PlaceAfterImage();
         }
     }

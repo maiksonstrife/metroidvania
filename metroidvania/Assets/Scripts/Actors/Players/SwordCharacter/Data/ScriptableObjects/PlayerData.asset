@@ -32,7 +32,7 @@ MonoBehaviour:
   AirDashVelocity: 30
   Drag: 10
   DashEndYMultiplier: 0.2
-  DistBetweenAfterImages: 2
+  DistBetweenAfterImages: 1
   GroundCheckRadius: 0.2
   WallCheckDistance: 0.5
   WhatIsGround:

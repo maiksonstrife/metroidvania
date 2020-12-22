@@ -39,9 +39,6 @@ public class SwordCharacterData : ScriptableObject
     public float Drag = 10f; // The drag slow down the Mass of a object, used here for "agains wind" effect
     public float DashEndYMultiplier = 0.2f; //Adds a force at the end of dash to keep momentum
     public float DistBetweenAfterImages = 0.5f; //The ghosting effect of Castlevania/Celeste
-    public float CameraShakeDuration = 0.3f;
-    public float CameraShakeAmplitude = 1.2f;
-    public float CameraShakeFrequency = 2.0f;
 
     [Header("Check Variables")]
     public float GroundCheckRadius = 0.2f;
