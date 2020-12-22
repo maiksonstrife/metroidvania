@@ -14,8 +14,8 @@
 - [x] Directional AirDash - 21/12/2020
 - [x] AirDash BulletTime - 21/12/2020
 - [x] GroundDash (Megaman X) -22/12/2020
-- [ ] Crouching -22/12/2020
-- [ ] Dodging -22/12/2020
+- [ ] Crouching 
+- [ ] Dodging 
 - [ ] Attacking/Combo
 - [ ] Save - Character State & Location
 
