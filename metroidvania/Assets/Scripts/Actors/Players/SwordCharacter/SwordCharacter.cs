@@ -26,6 +26,9 @@ public class SwordCharacter : MonoBehaviour
     public SwordCharacterInputHandler InputHandler { get; private set; }
     public Rigidbody2D RB { get; private set; }
     public Animator Anim { get; private set; }
+
+    [SerializeField]
+    public CameraController cameraController;
     #endregion
 
     #region Check Transforms
