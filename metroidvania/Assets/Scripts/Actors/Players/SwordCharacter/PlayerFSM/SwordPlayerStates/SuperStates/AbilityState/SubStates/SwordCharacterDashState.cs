@@ -6,9 +6,7 @@ public class SwordCharacterDashState : SwordCharacterAbilityState
 {
     public bool CanDash { get; private set; }
     public bool _isHolding;
-    private Vector2 _dashDirection;
     private Vector2 _lastAfterImagePos;
-    private Vector2 _dashDirectionInput;
     private bool _dashInputStop;
     private float _lastDashTime;
 
@@ -36,9 +34,13 @@ public class SwordCharacterDashState : SwordCharacterAbilityState
         base.LogicUpdate();
         if (isExitingState) return;
 
+        if (_jumpInput && _isHolding && IsGrounded)
+        {
+            SwordCharacter.SetVelocityAngular(SwordCharacterData.WallJumpVelocity, SwordCharacterData.WallJumpAngle, SwordCharacter.FacingDirection);
+        }
+
         if (_isHolding && IsGrounded)
         {
-            _dashDirectionInput = SwordCharacter.InputHandler.DashDirectionInput;
             _dashInputStop = SwordCharacter.InputHandler.DashInputStop;
             if (_dashInputStop) _isHolding = false;
             SwordCharacter.RB.drag = SwordCharacterData.Drag;
