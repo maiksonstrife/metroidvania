@@ -13,6 +13,7 @@ public class SwordCharacterJumpState : SwordCharacterAbilityState
     public override void Enter()
     {
         base.Enter();
+        if (isExitingState) return;
         SwordCharacter.InputHandler.JumpButtonUsed();
         SwordCharacter.SetVelocityY(SwordCharacterData.JumpVelocity);
         IsAbilityDone = true;

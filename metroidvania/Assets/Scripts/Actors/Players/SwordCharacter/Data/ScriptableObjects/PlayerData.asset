@@ -33,6 +33,10 @@ MonoBehaviour:
   Drag: 10
   DashEndYMultiplier: 0.2
   DistBetweenAfterImages: 1
+  DashCooldown: 0.5
+  DashVelocity: 20
+  DashTimeDistance: 0.3
+  DashDistBetweenAfterImages: 6
   GroundCheckRadius: 0.2
   WallCheckDistance: 0.5
   WhatIsGround:

@@ -81,9 +81,9 @@ public class SwordCharacterAirState : SwordCharaterState
         {
             SwordCharaterStateMachine.ChangeState(SwordCharacter.WallSlideState);
         }
-        else if (_dashInput && SwordCharacter.DashState.CheckIfCanDash())
+        else if (_dashInput && SwordCharacter.AirDashState.CheckIfCanDash())
         {
-            SwordCharaterStateMachine.ChangeState(SwordCharacter.DashState);
+            SwordCharaterStateMachine.ChangeState(SwordCharacter.AirDashState);
         }
         else
         {

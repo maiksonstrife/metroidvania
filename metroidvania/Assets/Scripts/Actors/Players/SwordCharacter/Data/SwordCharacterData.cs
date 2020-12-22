@@ -40,6 +40,12 @@ public class SwordCharacterData : ScriptableObject
     public float DashEndYMultiplier = 0.2f; //Adds a force at the end of dash to keep momentum
     public float DistBetweenAfterImages = 0.5f; //The ghosting effect of Castlevania/Celeste
 
+    [Header("Dash State")]
+    public float DashCooldown = 0.5f;
+    public float DashVelocity = 20f;
+    public float DashTimeDistance = 0.2f; 
+    public float DashDistBetweenAfterImages = 0.5f;
+
     [Header("Check Variables")]
     public float GroundCheckRadius = 0.2f;
     public float WallCheckDistance = 0.5f;

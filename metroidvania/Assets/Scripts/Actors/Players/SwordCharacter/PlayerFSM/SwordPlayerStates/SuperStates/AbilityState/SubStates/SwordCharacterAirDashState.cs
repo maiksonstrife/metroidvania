@@ -21,7 +21,7 @@ public class SwordCharacterAirDashState : SwordCharacterAbilityState
         SwordCharacter.SetShockWave(true);
         CanAirDash = false; //As we enter we used our dash
         SwordCharacter.InputHandler.DashInputUsed(); //Let the input known
-        _isHolding = true; //The current state
+        _isHolding = true; 
         _airDashDirection = Vector2.right * SwordCharacter.FacingDirection; //dash direction
         Time.timeScale = SwordCharacterData.HoldTimeScale; //Bullet Time
         startTime = Time.unscaledTime; //Since time is slowed down, startTime should be override
@@ -40,6 +40,7 @@ public class SwordCharacterAirDashState : SwordCharacterAbilityState
     {
         base.LogicUpdate();
         if (isExitingState) return;
+
         SwordCharacter.Anim.SetFloat("yVelocity", SwordCharacter.CurrentVelocity.y);
         SwordCharacter.Anim.SetFloat("xVelocity", Mathf.Abs(SwordCharacter.CurrentVelocity.x));
 
@@ -99,5 +100,4 @@ public class SwordCharacterAirDashState : SwordCharacterAbilityState
     }
 
     public void ResetCanDash() => CanAirDash = true;
-
 }

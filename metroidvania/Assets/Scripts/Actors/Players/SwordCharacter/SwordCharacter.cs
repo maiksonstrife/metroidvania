@@ -16,7 +16,8 @@ public class SwordCharacter : MonoBehaviour
     public SwordCharacterWallClimbState WallClimbState { get; private set; }
     public SwordCharacterWallJumpState WallJumpState { get; private set; }
     public SwordCharacterLedgeClimbState LedgeCLimbState { get; private set; }
-    public SwordCharacterAirDashState DashState { get; private set; }
+    public SwordCharacterAirDashState AirDashState { get; private set; }
+    public SwordCharacterDashState DashState { get; private set; }
 
     [SerializeField]
     private SwordCharacterData _characterData;
@@ -66,7 +67,8 @@ public class SwordCharacter : MonoBehaviour
         WallClimbState = new SwordCharacterWallClimbState(this, StateMachine, _characterData, "wallClimb");
         WallJumpState = new SwordCharacterWallJumpState(this, StateMachine, _characterData, "inAir");
         LedgeCLimbState = new SwordCharacterLedgeClimbState(this, StateMachine, _characterData, "ledgeClimb");
-        DashState = new SwordCharacterAirDashState(this, StateMachine, _characterData, "inAir");
+        AirDashState = new SwordCharacterAirDashState(this, StateMachine, _characterData, "inAir");
+        DashState = new SwordCharacterDashState(this, StateMachine, _characterData, "groundDash");
     }
 
     private void Start()

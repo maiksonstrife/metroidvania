@@ -30,6 +30,7 @@ public class SwordCharacterGroundedState : SwordCharaterState
     {
         base.Enter();
         SwordCharacter.JumpState.ResetAmountOfJumpsLeft();
+        SwordCharacter.AirDashState.ResetCanDash();
         SwordCharacter.DashState.ResetCanDash();
     }
 
@@ -50,15 +51,15 @@ public class SwordCharacterGroundedState : SwordCharaterState
         {
             SwordCharaterStateMachine.ChangeState(SwordCharacter.WallGrabState);
         }
+        else if (_dashInput && SwordCharacter.DashState.CheckIfCanDash())
+        {
+            SwordCharaterStateMachine.ChangeState(SwordCharacter.DashState);
+        }
         else if (!_isGrounded)
         {
 
             SwordCharacter.AirState.StartCoyoteTime();
             SwordCharaterStateMachine.ChangeState(SwordCharacter.AirState);
-        }
-        else if (_dashInput && SwordCharacter.DashState.CheckIfCanDash())
-        {
-            SwordCharaterStateMachine.ChangeState(SwordCharacter.DashState);
         }
     }
 }
