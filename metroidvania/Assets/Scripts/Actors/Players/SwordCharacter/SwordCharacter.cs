@@ -26,8 +26,6 @@ public class SwordCharacter : MonoBehaviour
     public SwordCharacterInputHandler InputHandler { get; private set; }
     public Rigidbody2D RB { get; private set; }
     public Animator Anim { get; private set; }
-    [SerializeField]
-    private GameObject ShockWave;
     #endregion
 
     #region Check Transforms
@@ -37,6 +35,8 @@ public class SwordCharacter : MonoBehaviour
     private Transform _wallCheck;    
     [SerializeField]
     private Transform _wallCheckAbove;
+    [SerializeField]
+    private Transform _shockWave;
     #endregion
 
     #region Player Variables
@@ -90,8 +90,7 @@ public class SwordCharacter : MonoBehaviour
     #region Set Functions
     public void SetShockWave(bool isActive)
     {
-        ShockWave.SetActive(isActive);
-        foreach (Transform child in ShockWave.transform)
+        foreach (Transform child in _shockWave)
         {
             child.gameObject.SetActive(isActive);
         }
