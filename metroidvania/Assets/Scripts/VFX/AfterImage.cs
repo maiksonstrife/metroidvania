@@ -22,7 +22,7 @@ public class AfterImage : MonoBehaviour
         _SR = GetComponent<SpriteRenderer>();
         _SPlayerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         _SPlayerSR = _SPlayerTransform.GetComponent<SpriteRenderer>();
-        Debug.Log(_SPlayerTransform);
+
         _alpha = _alphaSet;
         _SR.sprite = _SPlayerSR.sprite;
         transform.position = _SPlayerTransform.position;

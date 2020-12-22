@@ -26,6 +26,8 @@ public class SwordCharacter : MonoBehaviour
     public SwordCharacterInputHandler InputHandler { get; private set; }
     public Rigidbody2D RB { get; private set; }
     public Animator Anim { get; private set; }
+    [SerializeField]
+    private GameObject ShockWave;
     #endregion
 
     #region Check Transforms
@@ -86,6 +88,15 @@ public class SwordCharacter : MonoBehaviour
     #endregion
 
     #region Set Functions
+    public void SetShockWave(bool isActive)
+    {
+        ShockWave.SetActive(isActive);
+        foreach (Transform child in ShockWave.transform)
+        {
+            child.gameObject.SetActive(isActive);
+        }
+    }
+
     public void SetVelocityAngular(float velocity, Vector2 angle, int direction)
     {
         angle.Normalize();

@@ -18,6 +18,7 @@ public class SwordCharacterAirDashState : SwordCharacterAbilityState
     public override void Enter()
     {
         base.Enter();
+        SwordCharacter.SetShockWave(true);
         CanAirDash = false; //As we enter we used our dash
         SwordCharacter.InputHandler.DashInputUsed(); //Let the input known
         _isHolding = true; //The current state
@@ -56,6 +57,7 @@ public class SwordCharacterAirDashState : SwordCharacterAbilityState
             if(_dashInputStop || Time.unscaledTime >= startTime + SwordCharacterData.AirDashMaxHoldTime)
             {
                 _isHolding = false;
+                SwordCharacter.SetShockWave(false);
                 Time.timeScale = 1;
                 startTime = Time.time;
                 SwordCharacter.CheckIfShouldFlip(Mathf.RoundToInt(_airDashDirection.x));
@@ -87,7 +89,6 @@ public class SwordCharacterAirDashState : SwordCharacterAbilityState
     {
         if(Vector2.Distance(SwordCharacter.transform.position, _lastAfterImagePos) >= SwordCharacterData.DistBetweenAfterImages)
         {
-            Debug.Log("is reachiing here ?");
             PlaceAfterImage();
         }
     }
