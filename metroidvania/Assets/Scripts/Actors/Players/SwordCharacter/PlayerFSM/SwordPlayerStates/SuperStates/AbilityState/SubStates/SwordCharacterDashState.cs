@@ -27,6 +27,7 @@ public class SwordCharacterDashState : SwordCharacterAbilityState
     {
         base.Exit();
         if (!IsGrounded) SwordCharacter.JumpState.DecreaseAmountOfJumpsLeft();
+
     }
 
     public override void LogicUpdate()
@@ -36,7 +37,8 @@ public class SwordCharacterDashState : SwordCharacterAbilityState
 
         if (_jumpInput && _isHolding && IsGrounded)
         {
-            SwordCharacter.SetVelocityAngular(SwordCharacterData.WallJumpVelocity, SwordCharacterData.WallJumpAngle, SwordCharacter.FacingDirection);
+            SwordCharacter.RB.drag = 0;
+            SwordCharacter.SetVelocityAngular(SwordCharacterData.DashJumpVelocity, SwordCharacterData.DashJumpAngle, SwordCharacter.FacingDirection);
         }
 
         if (_isHolding && IsGrounded)

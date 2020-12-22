@@ -45,6 +45,8 @@ public class SwordCharacterData : ScriptableObject
     public float DashVelocity = 20f;
     public float DashTimeDistance = 0.2f; 
     public float DashDistBetweenAfterImages = 0.5f;
+    public float DashJumpVelocity = 30f;
+    public Vector2 DashJumpAngle = new Vector2(0.3f, 1.5f);
 
     [Header("Check Variables")]
     public float GroundCheckRadius = 0.2f;
