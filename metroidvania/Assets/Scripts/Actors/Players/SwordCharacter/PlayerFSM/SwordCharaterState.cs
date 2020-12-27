@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class SwordCharaterState
 {
-    protected SwordCharacter SwordCharacter;
-    protected SwordCharaterStateMachine SwordCharaterStateMachine;
-    protected SwordCharacterData SwordCharacterData;
+    protected SPlayer SwordCharacter;
+    protected SPlayerStateMachine SwordCharaterStateMachine;
+    protected SPlayerData SwordCharacterData;
     protected bool isAnimationFinished;
     protected bool isExitingState;
     protected float startTime;
     private string _animBoolName;
 
-    public SwordCharaterState(SwordCharacter swordCharacter, SwordCharaterStateMachine statemachine, SwordCharacterData swordCharacterData, string animBoolName)
+    public SwordCharaterState(SPlayer swordCharacter, SPlayerStateMachine statemachine, 
+        SPlayerData swordCharacterData, string animBoolName)
     {
         SwordCharacter = swordCharacter;
         SwordCharaterStateMachine = statemachine;

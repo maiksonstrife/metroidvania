@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordCharacterJumpState : SwordCharacterAbilityState
+public class SPlayerJumpState : SwordCharacterAbilityState
 {
     private int _amountsOfJumpsLeft;
-    public SwordCharacterJumpState(SwordCharacter swordCharacter, SwordCharaterStateMachine statemachine, SwordCharacterData swordCharacterData, string _animBoolName) : base(swordCharacter, statemachine, swordCharacterData, _animBoolName)
+    public SPlayerJumpState(SPlayer swordCharacter, SPlayerStateMachine statemachine, SPlayerData swordCharacterData, string _animBoolName) : base(swordCharacter, statemachine, swordCharacterData, _animBoolName)
     {
         _amountsOfJumpsLeft = swordCharacterData.AmountOfJumps;
     }

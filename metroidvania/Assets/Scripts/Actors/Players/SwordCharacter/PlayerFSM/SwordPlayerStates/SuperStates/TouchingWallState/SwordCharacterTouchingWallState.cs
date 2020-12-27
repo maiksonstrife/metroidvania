@@ -14,7 +14,7 @@ public class SwordCharacterTouchingWallState : SwordCharaterState
     protected bool GrabInput;
     protected bool JumpInput;
 
-    public SwordCharacterTouchingWallState(SwordCharacter swordCharacter, SwordCharaterStateMachine statemachine, SwordCharacterData swordCharacterData, string animBoolName) : base(swordCharacter, statemachine, swordCharacterData, animBoolName)
+    public SwordCharacterTouchingWallState(SPlayer swordCharacter, SPlayerStateMachine statemachine, SPlayerData swordCharacterData, string animBoolName) : base(swordCharacter, statemachine, swordCharacterData, animBoolName)
     {
     }
 

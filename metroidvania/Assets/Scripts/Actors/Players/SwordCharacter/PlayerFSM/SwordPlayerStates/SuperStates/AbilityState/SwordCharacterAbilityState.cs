@@ -11,7 +11,7 @@ public class SwordCharacterAbilityState : SwordCharaterState
     protected bool _dashInput;
     protected int XInput;
 
-    public SwordCharacterAbilityState(SwordCharacter swordCharacter, SwordCharaterStateMachine statemachine, SwordCharacterData swordCharacterData, string _animBoolName) : base(swordCharacter, statemachine, swordCharacterData, _animBoolName)
+    public SwordCharacterAbilityState(SPlayer swordCharacter, SPlayerStateMachine statemachine, SPlayerData swordCharacterData, string _animBoolName) : base(swordCharacter, statemachine, swordCharacterData, _animBoolName)
     {
     }
 

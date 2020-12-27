@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordCharaterStateMachine
+public class SPlayerStateMachine
 {
     public SwordCharaterState CurrentState { get; private set; } 
 

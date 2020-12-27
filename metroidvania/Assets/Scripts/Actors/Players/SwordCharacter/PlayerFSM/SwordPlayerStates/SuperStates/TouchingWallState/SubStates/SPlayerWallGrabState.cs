@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordCharacterWallGrabState : SwordCharacterTouchingWallState
+public class SPlayerWallGrabState : SwordCharacterTouchingWallState
 {
     private Vector2 _holdPosition;
 
-    public SwordCharacterWallGrabState(SwordCharacter swordCharacter, SwordCharaterStateMachine statemachine, SwordCharacterData swordCharacterData, string animBoolName) : base(swordCharacter, statemachine, swordCharacterData, animBoolName)
+    public SPlayerWallGrabState(SPlayer swordCharacter, SPlayerStateMachine statemachine, SPlayerData swordCharacterData, string animBoolName) : base(swordCharacter, statemachine, swordCharacterData, animBoolName)
     {
     }
 

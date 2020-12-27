@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordCharacterMoveState : SwordCharacterGroundedState
+public class SPlayerMoveState : SwordCharacterGroundedState
 {
-    public SwordCharacterMoveState(SwordCharacter swordCharacter, SwordCharaterStateMachine statemachine, SwordCharacterData swordCharacterData, string _animBoolName) 
+    public SPlayerMoveState(SPlayer swordCharacter, SPlayerStateMachine statemachine, SPlayerData swordCharacterData, string _animBoolName) 
         : base(swordCharacter, statemachine, swordCharacterData, _animBoolName)
     {
     }

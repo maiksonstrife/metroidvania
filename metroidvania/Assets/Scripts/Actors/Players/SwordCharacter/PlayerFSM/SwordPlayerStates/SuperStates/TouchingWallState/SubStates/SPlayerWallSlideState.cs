@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordCharacterWallSlideState : SwordCharacterTouchingWallState
+public class SPlayerWallSlideState : SwordCharacterTouchingWallState
 {
-    public SwordCharacterWallSlideState(SwordCharacter swordCharacter, SwordCharaterStateMachine statemachine, SwordCharacterData swordCharacterData, string animBoolName) : base(swordCharacter, statemachine, swordCharacterData, animBoolName)
+    public SPlayerWallSlideState(SPlayer swordCharacter, SPlayerStateMachine statemachine, SPlayerData swordCharacterData, string animBoolName) : base(swordCharacter, statemachine, swordCharacterData, animBoolName)
     {
     }
     public override void LogicUpdate()

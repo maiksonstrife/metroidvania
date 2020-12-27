@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
-public class SwordCharacterLandState : SwordCharacterGroundedState
+public class SPlayerIdleState : SwordCharacterGroundedState
 {
-    public SwordCharacterLandState(SwordCharacter swordCharacter, SwordCharaterStateMachine statemachine, SwordCharacterData swordCharacterData, string _animBoolName) : base(swordCharacter, statemachine, swordCharacterData, _animBoolName)
+    public SPlayerIdleState(SPlayer swordCharacter, SPlayerStateMachine statemachine, SPlayerData swordCharacterData, string _animBoolName)
+    : base(swordCharacter, statemachine, swordCharacterData, _animBoolName)
     {
     }
 
@@ -20,6 +22,5 @@ public class SwordCharacterLandState : SwordCharacterGroundedState
         if (isExitingState) return;
 
         if (XInput != 0) SwordCharaterStateMachine.ChangeState(SwordCharacter.MoveState);
-        else if (isAnimationFinished) SwordCharaterStateMachine.ChangeState(SwordCharacter.IdleState);
     }
 }

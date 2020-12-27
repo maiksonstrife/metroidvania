@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6d87d2dfcd02f74eb78d958649ce2a5, type: 3}
-  m_Name: PlayerData
+  m_Script: {fileID: 11500000, guid: 421291f313f4d7149bd31cac0c2f60b3, type: 3}
+  m_Name: NewSPlayerData
   m_EditorClassIdentifier: 
   MovementVelocity: 10
   JumpVelocity: 15
@@ -50,6 +50,6 @@ MonoBehaviour:
   canSlide: 1
   canDoubleJump: 1
   canWallJump: 1
-  canDash: 0
-  canAirDash: 0
-  canAirDashBulletTime: 0
+  canDash: 1
+  canAirDash: 1
+  canAirDashBulletTime: 1

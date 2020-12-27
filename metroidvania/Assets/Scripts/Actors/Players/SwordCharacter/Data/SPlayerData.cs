@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewPlayerData", menuName = "Data/Player Data/Base Data")]
-public class SwordCharacterData : ScriptableObject
+[CreateAssetMenu(fileName = "NewSPlayerData", menuName = "Data/SPlayer Data/Base Data")]
+public class SPlayerData : ScriptableObject
 {
     [Header("Move State")]
     public float MovementVelocity = 10f;

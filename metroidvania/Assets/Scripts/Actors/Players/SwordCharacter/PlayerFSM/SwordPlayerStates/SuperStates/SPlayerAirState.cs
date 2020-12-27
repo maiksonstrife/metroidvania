@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordCharacterAirState : SwordCharaterState
+public class SPlayerAirState : SwordCharaterState
 {
     //Input
     private int _xInput;
@@ -21,7 +21,7 @@ public class SwordCharacterAirState : SwordCharaterState
     private bool _coyoteTime;
     private bool _isJumping;
 
-    public SwordCharacterAirState(SwordCharacter swordCharacter, SwordCharaterStateMachine statemachine, SwordCharacterData swordCharacterData, string _animBoolName) : base(swordCharacter, statemachine, swordCharacterData, _animBoolName)
+    public SPlayerAirState(SPlayer swordCharacter, SPlayerStateMachine statemachine, SPlayerData swordCharacterData, string _animBoolName) : base(swordCharacter, statemachine, swordCharacterData, _animBoolName)
     {
     }
 

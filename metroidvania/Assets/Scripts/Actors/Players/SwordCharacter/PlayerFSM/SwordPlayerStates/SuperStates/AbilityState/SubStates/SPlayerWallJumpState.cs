@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordCharacterWallJumpState : SwordCharacterAbilityState
+public class SPlayerWallJumpState : SwordCharacterAbilityState
 {
     private int _wallJumpDirection;
-    public SwordCharacterWallJumpState(SwordCharacter swordCharacter, SwordCharaterStateMachine statemachine, SwordCharacterData swordCharacterData, string _animBoolName) : base(swordCharacter, statemachine, swordCharacterData, _animBoolName)
+    public SPlayerWallJumpState(SPlayer swordCharacter, SPlayerStateMachine statemachine, SPlayerData swordCharacterData, string _animBoolName) : base(swordCharacter, statemachine, swordCharacterData, _animBoolName)
     {
     }
 

@@ -13,7 +13,7 @@ public class SwordCharacterGroundedState : SwordCharaterState
     private bool _isGrounded;
     private bool _isGrabbable;
     private bool _isTouchingWallAbove;
-    public SwordCharacterGroundedState(SwordCharacter swordCharacter, SwordCharaterStateMachine statemachine, SwordCharacterData swordCharacterData, string _animBoolName)
+    public SwordCharacterGroundedState(SPlayer swordCharacter, SPlayerStateMachine statemachine, SPlayerData swordCharacterData, string _animBoolName)
     : base(swordCharacter, statemachine, swordCharacterData, _animBoolName)
     {
     }

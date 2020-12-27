@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordCharacterDashState : SwordCharacterAbilityState
+public class SPlayerDashState : SwordCharacterAbilityState
 {
     public bool CanDash { get; private set; }
     public bool _isHolding;
@@ -10,7 +10,7 @@ public class SwordCharacterDashState : SwordCharacterAbilityState
     private bool _dashInputStop;
     private float _lastDashTime;
 
-    public SwordCharacterDashState(SwordCharacter swordCharacter, SwordCharaterStateMachine statemachine, SwordCharacterData swordCharacterData, string _animBoolName) : base(swordCharacter, statemachine, swordCharacterData, _animBoolName)
+    public SPlayerDashState(SPlayer swordCharacter, SPlayerStateMachine statemachine, SPlayerData swordCharacterData, string _animBoolName) : base(swordCharacter, statemachine, swordCharacterData, _animBoolName)
     {
     }
 

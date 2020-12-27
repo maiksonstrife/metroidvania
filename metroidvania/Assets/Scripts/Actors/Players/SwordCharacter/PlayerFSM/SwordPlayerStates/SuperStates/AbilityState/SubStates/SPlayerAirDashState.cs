@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordCharacterAirDashState : SwordCharacterAbilityState
+public class SPlayerAirDashState : SwordCharacterAbilityState
 {
     public bool CanAirDash { get; private set; }
     private float _lastAirDashTime;
@@ -12,7 +12,7 @@ public class SwordCharacterAirDashState : SwordCharacterAbilityState
     private Vector2 _airDashDirectionInput;
     private Vector2 _lastAfterImagePos;
 
-    public SwordCharacterAirDashState(SwordCharacter swordCharacter, SwordCharaterStateMachine statemachine, SwordCharacterData swordCharacterData, string _animBoolName) : base(swordCharacter, statemachine, swordCharacterData, _animBoolName)
+    public SPlayerAirDashState(SPlayer swordCharacter, SPlayerStateMachine statemachine, SPlayerData swordCharacterData, string _animBoolName) : base(swordCharacter, statemachine, swordCharacterData, _animBoolName)
     {
     }
     public override void Enter()

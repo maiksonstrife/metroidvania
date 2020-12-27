@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordCharacterLedgeClimbState : SwordCharaterState
+public class SPlayerLedgeClimbState : SwordCharaterState
 {
     private Vector2 _detectedPos;
     private Vector2 _cornerPos;
@@ -16,7 +16,7 @@ public class SwordCharacterLedgeClimbState : SwordCharaterState
     private float _timer;
     private float _inputDelay = 0.2f;
 
-    public SwordCharacterLedgeClimbState(SwordCharacter swordCharacter, SwordCharaterStateMachine statemachine, SwordCharacterData swordCharacterData, string animBoolName) : base(swordCharacter, statemachine, swordCharacterData, animBoolName)
+    public SPlayerLedgeClimbState(SPlayer swordCharacter, SPlayerStateMachine statemachine, SPlayerData swordCharacterData, string animBoolName) : base(swordCharacter, statemachine, swordCharacterData, animBoolName)
     {
     }
 

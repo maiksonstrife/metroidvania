@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordCharacterWallClimbState : SwordCharacterTouchingWallState
+public class SPlayerWallClimbState : SwordCharacterTouchingWallState
 {
-    public SwordCharacterWallClimbState(SwordCharacter swordCharacter, SwordCharaterStateMachine statemachine, SwordCharacterData swordCharacterData, string animBoolName) : base(swordCharacter, statemachine, swordCharacterData, animBoolName)
+    public SPlayerWallClimbState(SPlayer swordCharacter, SPlayerStateMachine statemachine, SPlayerData swordCharacterData, string animBoolName) : base(swordCharacter, statemachine, swordCharacterData, animBoolName)
     {
     }
 

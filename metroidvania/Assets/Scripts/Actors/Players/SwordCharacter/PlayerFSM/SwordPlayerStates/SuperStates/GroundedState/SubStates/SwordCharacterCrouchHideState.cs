@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SwordCharacterCrouchHideState : SwordCharacterGroundedState
 {
-    public SwordCharacterCrouchHideState(SwordCharacter swordCharacter, SwordCharaterStateMachine statemachine, SwordCharacterData swordCharacterData, string _animBoolName) : base(swordCharacter, statemachine, swordCharacterData, _animBoolName)
+    public SwordCharacterCrouchHideState(SPlayer swordCharacter, SPlayerStateMachine statemachine, SPlayerData swordCharacterData, string _animBoolName) : base(swordCharacter, statemachine, swordCharacterData, _animBoolName)
     {
     }
 

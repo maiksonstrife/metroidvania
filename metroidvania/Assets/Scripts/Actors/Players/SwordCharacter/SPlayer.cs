@@ -2,25 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordCharacter : MonoBehaviour
+public class SPlayer : MonoBehaviour
 {
     #region State Variables
-    public SwordCharacterIdleState IdleState { get; private set; }
-    public SwordCharacterMoveState MoveState { get; private set; }
-    public SwordCharaterStateMachine StateMachine { get; private set; }
-    public SwordCharacterJumpState JumpState { get; private set; }
-    public SwordCharacterAirState AirState { get; private set; }
-    public SwordCharacterLandState LandState { get; private set; }
-    public SwordCharacterWallSlideState WallSlideState { get; private set; }
-    public SwordCharacterWallGrabState WallGrabState { get; private set; }
-    public SwordCharacterWallClimbState WallClimbState { get; private set; }
-    public SwordCharacterWallJumpState WallJumpState { get; private set; }
-    public SwordCharacterLedgeClimbState LedgeCLimbState { get; private set; }
-    public SwordCharacterAirDashState AirDashState { get; private set; }
-    public SwordCharacterDashState DashState { get; private set; }
+    public SPlayerIdleState IdleState { get; private set; }
+    public SPlayerMoveState MoveState { get; private set; }
+    public SPlayerStateMachine StateMachine { get; private set; }
+    public SPlayerJumpState JumpState { get; private set; }
+    public SPlayerAirState AirState { get; private set; }
+    public SPlayerLandState LandState { get; private set; }
+    public SPlayerWallSlideState WallSlideState { get; private set; }
+    public SPlayerWallGrabState WallGrabState { get; private set; }
+    public SPlayerWallClimbState WallClimbState { get; private set; }
+    public SPlayerWallJumpState WallJumpState { get; private set; }
+    public SPlayerLedgeClimbState LedgeCLimbState { get; private set; }
+    public SPlayerAirDashState AirDashState { get; private set; }
+    public SPlayerDashState DashState { get; private set; }
 
     [SerializeField]
-    private SwordCharacterData _characterData;
+    private SPlayerData _SPlayerData;
     #endregion
 
     #region Components
@@ -55,20 +55,20 @@ public class SwordCharacter : MonoBehaviour
     #region Unity Callback Functions
     private void Awake()
     {
-        StateMachine = new SwordCharaterStateMachine();
+        StateMachine = new SPlayerStateMachine();
         InputHandler = GetComponent<SwordCharacterInputHandler>();
-        IdleState = new SwordCharacterIdleState(this, StateMachine, _characterData, "idle");
-        MoveState = new SwordCharacterMoveState(this, StateMachine, _characterData, "move");
-        JumpState = new SwordCharacterJumpState(this, StateMachine, _characterData, "inAir");
-        AirState = new SwordCharacterAirState(this, StateMachine, _characterData, "inAir");
-        LandState = new SwordCharacterLandState(this, StateMachine, _characterData, "land");
-        WallSlideState = new SwordCharacterWallSlideState(this, StateMachine, _characterData, "wallSlide");
-        WallGrabState = new SwordCharacterWallGrabState(this, StateMachine, _characterData, "wallGrab");
-        WallClimbState = new SwordCharacterWallClimbState(this, StateMachine, _characterData, "wallClimb");
-        WallJumpState = new SwordCharacterWallJumpState(this, StateMachine, _characterData, "inAir");
-        LedgeCLimbState = new SwordCharacterLedgeClimbState(this, StateMachine, _characterData, "ledgeClimb");
-        AirDashState = new SwordCharacterAirDashState(this, StateMachine, _characterData, "inAir");
-        DashState = new SwordCharacterDashState(this, StateMachine, _characterData, "groundDash");
+        IdleState = new SPlayerIdleState(this, StateMachine, _SPlayerData, "idle");
+        MoveState = new SPlayerMoveState(this, StateMachine, _SPlayerData, "move");
+        JumpState = new SPlayerJumpState(this, StateMachine, _SPlayerData, "inAir");
+        AirState = new SPlayerAirState(this, StateMachine, _SPlayerData, "inAir");
+        LandState = new SPlayerLandState(this, StateMachine, _SPlayerData, "land");
+        WallSlideState = new SPlayerWallSlideState(this, StateMachine, _SPlayerData, "wallSlide");
+        WallGrabState = new SPlayerWallGrabState(this, StateMachine, _SPlayerData, "wallGrab");
+        WallClimbState = new SPlayerWallClimbState(this, StateMachine, _SPlayerData, "wallClimb");
+        WallJumpState = new SPlayerWallJumpState(this, StateMachine, _SPlayerData, "inAir");
+        LedgeCLimbState = new SPlayerLedgeClimbState(this, StateMachine, _SPlayerData, "ledgeClimb");
+        AirDashState = new SPlayerAirDashState(this, StateMachine, _SPlayerData, "inAir");
+        DashState = new SPlayerDashState(this, StateMachine, _SPlayerData, "groundDash");
     }
 
     private void Start()
@@ -137,7 +137,7 @@ public class SwordCharacter : MonoBehaviour
     #region Check Functions
     public bool CheckIfTouchingGround()
     {
-        return Physics2D.OverlapCircle(_groundCheck.position, _characterData.GroundCheckRadius, _characterData.WhatIsGround);
+        return Physics2D.OverlapCircle(_groundCheck.position, _SPlayerData.GroundCheckRadius, _SPlayerData.WhatIsGround);
     }
 
     public void CheckIfShouldFlip(int XInput)
@@ -147,29 +147,29 @@ public class SwordCharacter : MonoBehaviour
 
     public bool CheckIfTouchingWall()
     {
-        return Physics2D.Raycast(_wallCheck.position, Vector2.right * FacingDirection, _characterData.WallCheckDistance, _characterData.WhatIsGround);
+        return Physics2D.Raycast(_wallCheck.position, Vector2.right * FacingDirection, _SPlayerData.WallCheckDistance, _SPlayerData.WhatIsGround);
     }
 
     public bool CheckIfTouchingWallAbove()
     {
-        return Physics2D.Raycast(_wallCheckAbove.position, Vector2.right * FacingDirection, _characterData.WallCheckDistance, _characterData.WhatIsGround);
+        return Physics2D.Raycast(_wallCheckAbove.position, Vector2.right * FacingDirection, _SPlayerData.WallCheckDistance, _SPlayerData.WhatIsGround);
     }
 
     public bool CheckIfTouchingGrabbableAbove()
     {
-        return Physics2D.Raycast(_wallCheckAbove.position, Vector2.right * FacingDirection, _characterData.WallCheckDistance, _characterData.WhatIsGrabbable);
+        return Physics2D.Raycast(_wallCheckAbove.position, Vector2.right * FacingDirection, _SPlayerData.WallCheckDistance, _SPlayerData.WhatIsGrabbable);
     }
 
     public bool CheckIfTouchingWallBack()
     {
-        if (Physics2D.Raycast(_wallCheck.position, Vector2.right * -FacingDirection, _characterData.WallCheckDistance, _characterData.WhatIsGround)) return true;
-        if (Physics2D.Raycast(_wallCheck.position, Vector2.right * -FacingDirection, _characterData.WallCheckDistance, _characterData.WhatIsGrabbable)) return true;
+        if (Physics2D.Raycast(_wallCheck.position, Vector2.right * -FacingDirection, _SPlayerData.WallCheckDistance, _SPlayerData.WhatIsGround)) return true;
+        if (Physics2D.Raycast(_wallCheck.position, Vector2.right * -FacingDirection, _SPlayerData.WallCheckDistance, _SPlayerData.WhatIsGrabbable)) return true;
         else return false;
     }
 
     public bool CheckIfIsGrabbable()
     {
-        return Physics2D.Raycast(_wallCheck.position, Vector2.right * FacingDirection, _characterData.WallCheckDistance, _characterData.WhatIsGrabbable);
+        return Physics2D.Raycast(_wallCheck.position, Vector2.right * FacingDirection, _SPlayerData.WallCheckDistance, _SPlayerData.WhatIsGrabbable);
     }
     #endregion
 
@@ -184,11 +184,11 @@ public class SwordCharacter : MonoBehaviour
 
     public Vector2 DetermineCornerPosition()
     {
-        RaycastHit2D xHit = Physics2D.Raycast(_wallCheck.position, Vector2.right * FacingDirection, _characterData.WallCheckDistance, _characterData.WhatIsGround);
+        RaycastHit2D xHit = Physics2D.Raycast(_wallCheck.position, Vector2.right * FacingDirection, _SPlayerData.WallCheckDistance, _SPlayerData.WhatIsGround);
         float xDist = xHit.distance;
         _workSpace.Set((xDist + 0.015f) * FacingDirection, 0f);
 
-        RaycastHit2D yHit = Physics2D.Raycast(_wallCheckAbove.position + (Vector3) (_workSpace), Vector2.down, _wallCheckAbove.position.y - _wallCheck.position.y + 0.015f, _characterData.WhatIsGround);
+        RaycastHit2D yHit = Physics2D.Raycast(_wallCheckAbove.position + (Vector3) (_workSpace), Vector2.down, _wallCheckAbove.position.y - _wallCheck.position.y + 0.015f, _SPlayerData.WhatIsGround);
         float yDist = yHit.distance;
 
         _workSpace.Set(_wallCheck.position.x + (xDist * FacingDirection), _wallCheckAbove.position.y - yDist);
