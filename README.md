@@ -11,8 +11,11 @@
 - [x] WallClimb - 29/11/2020
 - [x] WallJump - 05/12/2020
 - [x] LedgeClimb/LedgeDrop - 13/12/2020
-- [ ] Directional AirDash
-- [ ] GroundDash
+- [x] Directional AirDash - 21/12/2020
+- [x] AirDash BulletTime - 21/12/2020
+- [x] GroundDash (Megaman X) -22/12/2020
+- [ ] Crouching 
+- [ ] Dodging 
 - [ ] Attacking/Combo
 - [ ] Save - Character State & Location
 
