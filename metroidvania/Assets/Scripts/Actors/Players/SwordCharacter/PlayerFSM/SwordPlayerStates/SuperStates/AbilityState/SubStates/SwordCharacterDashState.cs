@@ -23,13 +23,6 @@ public class SwordCharacterDashState : SwordCharacterAbilityState
         PlaceAfterImage();
     }
 
-    public override void Exit()
-    {
-        base.Exit();
-        if (!IsGrounded) SwordCharacter.JumpState.DecreaseAmountOfJumpsLeft();
-
-    }
-
     public override void LogicUpdate()
     {
         base.LogicUpdate();
@@ -56,6 +49,13 @@ public class SwordCharacterDashState : SwordCharacterAbilityState
             IsAbilityDone = true;
             _lastDashTime = Time.time;
         }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        if (!IsGrounded) SwordCharacter.JumpState.DecreaseAmountOfJumpsLeft();
+
     }
 
     private void PlaceAfterImage()

@@ -8,7 +8,7 @@ public class SwordCharacterAirDashState : SwordCharacterAbilityState
     private float _lastAirDashTime;
     private bool _isHolding;
     private bool _dashInputStop;
-    private Vector2 _airDashDirection;
+    private Vector2 _airDashFaceDirection;
     private Vector2 _airDashDirectionInput;
     private Vector2 _lastAfterImagePos;
 
@@ -22,18 +22,9 @@ public class SwordCharacterAirDashState : SwordCharacterAbilityState
         CanAirDash = false; //As we enter we used our dash
         SwordCharacter.InputHandler.DashInputUsed(); //Let the input known
         _isHolding = true; 
-        _airDashDirection = Vector2.right * SwordCharacter.FacingDirection; //dash direction
+        _airDashFaceDirection = Vector2.right * SwordCharacter.FacingDirection; //dash direction
         Time.timeScale = SwordCharacterData.HoldTimeScale; //Bullet Time
         startTime = Time.unscaledTime; //Since time is slowed down, startTime should be override
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-        if(SwordCharacter.CurrentVelocity.y > 0)
-        {
-            SwordCharacter.SetVelocityY(SwordCharacter.CurrentVelocity.y * SwordCharacterData.DashEndYMultiplier);
-        }
     }
 
     public override void LogicUpdate()
@@ -51,8 +42,8 @@ public class SwordCharacterAirDashState : SwordCharacterAbilityState
 
             if(_airDashDirectionInput != Vector2.zero)
             {
-                _airDashDirection = _airDashDirectionInput;
-                _airDashDirection.Normalize();
+                _airDashFaceDirection = _airDashDirectionInput;
+                _airDashFaceDirection.Normalize();
             }
 
             if(_dashInputStop || Time.unscaledTime >= startTime + SwordCharacterData.AirDashMaxHoldTime)
@@ -61,15 +52,15 @@ public class SwordCharacterAirDashState : SwordCharacterAbilityState
                 SwordCharacter.SetShockWave(false);
                 Time.timeScale = 1;
                 startTime = Time.time;
-                SwordCharacter.CheckIfShouldFlip(Mathf.RoundToInt(_airDashDirection.x));
+                SwordCharacter.CheckIfShouldFlip(Mathf.RoundToInt(_airDashFaceDirection.x));
                 SwordCharacter.RB.drag = SwordCharacterData.Drag;
-                SwordCharacter.SetVelocityEightDirectional(SwordCharacterData.AirDashVelocity, _airDashDirection);
+                SwordCharacter.SetVelocityEightDirectional(SwordCharacterData.AirDashVelocity, _airDashFaceDirection);
                 PlaceAfterImage();
             }
         }
         else
         {
-            SwordCharacter.SetVelocityEightDirectional(SwordCharacterData.AirDashVelocity, _airDashDirection);
+            SwordCharacter.SetVelocityEightDirectional(SwordCharacterData.AirDashVelocity, _airDashFaceDirection);
             CheckIfShouldPlaceAfterImage();
             if (Time.time >= startTime + SwordCharacterData.AirDashTimeDistance)
             {
@@ -77,6 +68,15 @@ public class SwordCharacterAirDashState : SwordCharacterAbilityState
                 IsAbilityDone = true;
                 _lastAirDashTime = Time.time;
             }
+        }
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        if (SwordCharacter.CurrentVelocity.y > 0)
+        {
+            SwordCharacter.SetVelocityY(SwordCharacter.CurrentVelocity.y * SwordCharacterData.DashEndYMultiplier);
         }
     }
 

@@ -8,7 +8,6 @@ public class AfterImagePool : MonoBehaviour
 
     [SerializeField]
     private GameObject _afterImagePrefab;
-    //Queue sets objects inseide a queue, the first object added to queue, will be taken out with Dequeue
     private Queue<GameObject> _avaliableObjects = new Queue<GameObject>();
 
     private void Awake()
@@ -17,7 +16,7 @@ public class AfterImagePool : MonoBehaviour
         GrowPool();
     }
 
-    private void GrowPool() //Creates more GameObjects for the Pool
+    private void GrowPool() 
     {
         for (int i=0; i<10; i++)
         {
@@ -27,13 +26,13 @@ public class AfterImagePool : MonoBehaviour
         }
     }
 
-    public void AddToPool(GameObject instance) //Adds single Object to pool as false
+    public void AddToPool(GameObject instance)
     {
         instance.SetActive(false);
         _avaliableObjects.Enqueue(instance);
     }
 
-    public GameObject GetFromPool() //Deliver a object with Dequeue, if none object exists, it will create with GrowPool
+    public GameObject GetFromPool() 
     {
         if(_avaliableObjects.Count == 0)
         {

@@ -37,6 +37,8 @@ MonoBehaviour:
   DashVelocity: 20
   DashTimeDistance: 0.3
   DashDistBetweenAfterImages: 6
+  DashJumpVelocity: 50
+  DashJumpAngle: {x: 3, y: 2.5}
   GroundCheckRadius: 0.2
   WallCheckDistance: 0.5
   WhatIsGround:
@@ -48,3 +50,6 @@ MonoBehaviour:
   canSlide: 1
   canDoubleJump: 1
   canWallJump: 1
+  canDash: 0
+  canAirDash: 0
+  canAirDashBulletTime: 0
