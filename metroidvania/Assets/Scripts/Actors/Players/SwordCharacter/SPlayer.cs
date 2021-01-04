@@ -137,7 +137,9 @@ public class SPlayer : MonoBehaviour
     #region Check Functions
     public bool CheckIfTouchingGround()
     {
-        return Physics2D.OverlapCircle(_groundCheck.position, _SPlayerData.GroundCheckRadius, _SPlayerData.WhatIsGround);
+        if (Physics2D.OverlapCircle(_groundCheck.position, _SPlayerData.GroundCheckRadius, _SPlayerData.WhatIsGround)) return true;
+        if (Physics2D.OverlapCircle(_groundCheck.position, _SPlayerData.GroundCheckRadius, _SPlayerData.WhatIsGrabbable)) return true;
+        else return false;
     }
 
     public void CheckIfShouldFlip(int XInput)
@@ -226,6 +228,5 @@ public class SPlayer : MonoBehaviour
     }
 #endif
     #endregion
-
 
 }

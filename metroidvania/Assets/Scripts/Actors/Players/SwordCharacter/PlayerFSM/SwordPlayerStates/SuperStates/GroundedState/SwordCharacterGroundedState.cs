@@ -13,6 +13,7 @@ public class SwordCharacterGroundedState : SwordCharaterState
     private bool _isGrounded;
     private bool _isGrabbable;
     private bool _isTouchingWallAbove;
+    private bool _isTouchingGrabbleAbove;
     public SwordCharacterGroundedState(SPlayer swordCharacter, SPlayerStateMachine statemachine, SPlayerData swordCharacterData, string _animBoolName)
     : base(swordCharacter, statemachine, swordCharacterData, _animBoolName)
     {
@@ -24,6 +25,7 @@ public class SwordCharacterGroundedState : SwordCharaterState
         _isGrounded = SwordCharacter.CheckIfTouchingGround();
         _isGrabbable = SwordCharacter.CheckIfIsGrabbable();
         _isTouchingWallAbove = SwordCharacter.CheckIfTouchingWallAbove();
+        _isTouchingGrabbleAbove = SwordCharacter.CheckIfTouchingGrabbableAbove();
     }
 
     public override void Enter()
@@ -47,7 +49,7 @@ public class SwordCharacterGroundedState : SwordCharaterState
         {
             SwordCharaterStateMachine.ChangeState(SwordCharacter.JumpState);
         }
-        else if (_isGrabbable && _grabInput && YInput >= 0 && _isTouchingWallAbove)
+        else if (_isGrabbable && _grabInput && YInput >= 0 && _isTouchingGrabbleAbove)
         {
             SwordCharaterStateMachine.ChangeState(SwordCharacter.WallGrabState);
         }

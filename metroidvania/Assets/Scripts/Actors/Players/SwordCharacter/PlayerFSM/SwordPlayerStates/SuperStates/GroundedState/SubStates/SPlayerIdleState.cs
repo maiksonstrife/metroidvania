@@ -22,5 +22,6 @@ public class SPlayerIdleState : SwordCharacterGroundedState
         if (isExitingState) return;
 
         if (XInput != 0) SwordCharaterStateMachine.ChangeState(SwordCharacter.MoveState);
+
     }
 }

@@ -15,9 +15,9 @@ TagManager:
   - 
   - Ground
   - Grabbable
-  - 
-  - 
-  - 
+  - Foreground
+  - Player
+  - Terrain
   - 
   - 
   - 

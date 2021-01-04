@@ -73,7 +73,7 @@ public class SPlayerAirState : SwordCharaterState
             SwordCharacter.Anim.SetTrigger("isDoubleJumpTrigger");
             SwordCharaterStateMachine.ChangeState(SwordCharacter.JumpState);
         }
-        else if (_isTouchingGrabbable && _grabInput && _isTouchingWallAbove)
+        else if (_isTouchingGrabbable && _grabInput && _isTouchingGrabbableAbove)
         {
             SwordCharaterStateMachine.ChangeState(SwordCharacter.WallGrabState);
         }
